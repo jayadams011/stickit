@@ -18,4 +18,26 @@ function Note() {
   //this.filterColor = #fff;
 
   Note.notes.push(this);
+
+  this.render = function() {
+    //get elements
+    var bodyEl = document.querySelectorAll('body');
+    var noteEl = document.createElement('div');
+    var noteHeaderEl = document.createElement('div');
+    var noteInputEl = document.createElement('textarea');
+
+    //set position and size for note
+    noteEl.style.top = this.coords[1] + 'px';
+    noteEl.style.left = this.coords[0] + 'px';
+    noteEl.style.height = this.height + 'px';
+    noteEl.style.width = this.width + 'px';
+
+    //add content to note
+    noteInputEl.textContent = this.contents;
+
+    //build note element and attach to DOM
+    noteEl.appendChild(noteHeaderEl);
+    noteEl.appendChild(noteInputEl);
+    bodyEl.appendChild(noteEl);
+  }
 }
