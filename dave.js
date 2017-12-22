@@ -26,6 +26,7 @@ function Note() {
     var noteEl = document.createElement('div');
     var noteHeaderEl = document.createElement('div');
     var noteInputEl = document.createElement('textarea');
+    var noteResizeEl = document.createElement('div');
 
     //set position and size for note
     noteEl.style.top = this.coords[1] + 'px';
@@ -39,10 +40,14 @@ function Note() {
 
     //set classes to be used by css styles
     noteEl.setAttribute('class','note');
+    noteHeaderEl.setAttribute('class','noteHeader');
+    noteInputEl.setAttribute('class','noteInput');
+    noteResizeEl.setAttribute('class','noteResize');
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
     noteEl.appendChild(noteInputEl);
+    noteEl.appendChild(noteResizeEl);
     bodyEl.appendChild(noteEl);
   }
 }
