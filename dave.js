@@ -58,7 +58,7 @@ function Note() {
     noteResizeEl.addEventListener('mousePressed', function() { toFront(this); this.resize(); });
 
     //temp listener
-    noteInputEl.addEventListener('click', this.unrender);
+    noteInputEl.addEventListener('click', this.unrender.bind(this));
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
