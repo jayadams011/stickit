@@ -1,6 +1,6 @@
 'use strict';
 
-var Note.notes = [];
+Note.notes = [];
 function Note() {
 
   //the top-left corner's xy-coordinates of the format [x,y]
@@ -10,8 +10,9 @@ function Note() {
   this.height = 400;
   this.width = 400;
  
-  //the text contents of the note:
+  //the text contents of the note
   this.contents = '';
+  this.title = '';
 
   //For use with note color stretch goal
   //this.filter = false;
@@ -21,7 +22,7 @@ function Note() {
 
   this.render = function() {
     //get elements
-    var bodyEl = document.querySelectorAll('body');
+    var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
     var noteHeaderEl = document.createElement('div');
     var noteInputEl = document.createElement('textarea');
@@ -34,6 +35,10 @@ function Note() {
 
     //add content to note
     noteInputEl.textContent = this.contents;
+    noteHeaderEl.textContent = this.title;
+
+    //set classes to be used by css styles
+    noteEl.setAttribute('class','note');
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
@@ -41,3 +46,6 @@ function Note() {
     bodyEl.appendChild(noteEl);
   }
 }
+
+var note = new Note();
+note.render();
