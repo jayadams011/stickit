@@ -9,9 +9,6 @@ function Note() {
   //the text contents of the note:
   this.contents = '';
 
-  //used to set the z-index on page load
-  this.zIndex = 0;
-
   //For use with note color stretch goal
   //this.filter = false;
   //this.filterColor = #fff;
