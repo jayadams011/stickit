@@ -19,7 +19,7 @@ function Note() {
   //this.filterColor = #fff;
 
   Note.notes.push(this);
-
+  
   this.render = function() {
     //get elements
     var bodyEl = document.querySelector('body');
@@ -43,6 +43,10 @@ function Note() {
     noteHeaderEl.setAttribute('class','noteHeader');
     noteInputEl.setAttribute('class','noteInput');
     noteResizeEl.setAttribute('class','noteResize');
+
+    //event listeners for move/resize
+    noteHeaderEl.addEventListener('mousePressed', function() { toFront(this); this.move(); });
+    noteResizeEl.addEventListener('mousePressed', function() { toFront(this); this.resize(); });
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
