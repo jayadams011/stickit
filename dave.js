@@ -3,8 +3,12 @@
 var Note.notes = [];
 function Note() {
 
-  //the top-left and bottom-right corners' xy-coordinates of the format [x1,y1,x2,y2]
-  this.coords = [400,400,800,800];
+  //the top-left corner's xy-coordinates of the format [x,y]
+  this.coords = [400,400];
+
+  //dimensions of the note
+  this.height = 400px;
+  this.width = 400px;
  
   //the text contents of the note:
   this.contents = '';
