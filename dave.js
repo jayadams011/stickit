@@ -14,12 +14,20 @@ function Note() {
   this.contents = '';
   this.title = '';
 
+  //object id for use with unrender function
+  this.id = 'note' + Note.notes.length;
+
   //For use with note color stretch goal
   //this.filter = false;
   //this.filterColor = #fff;
 
   Note.notes.push(this);
-
+  
+  this.unrender = function() {
+    var noteEl = document.getElementById(this.id);
+    noteEl.parentNode.removeChild(noteEl);
+  }
+  
   this.render = function() {
     //get elements
     var bodyEl = document.querySelector('body');
@@ -38,11 +46,19 @@ function Note() {
     noteInputEl.textContent = this.contents;
     noteHeaderEl.textContent = this.title;
 
-    //set classes to be used by css styles
-    noteEl.setAttribute('class','note');
-    noteHeaderEl.setAttribute('class','noteHeader');
-    noteInputEl.setAttribute('class','noteInput');
-    noteResizeEl.setAttribute('class','noteResize');
+    //set classes and ids to be used by styles and scripts
+    noteEl.setAttribute('class', 'note');
+    noteEl.setAttribute('id', this.id);
+    noteHeaderEl.setAttribute('class', 'noteHeader');
+    noteInputEl.setAttribute('class' ,'noteInput');
+    noteResizeEl.setAttribute('class', 'noteResize');
+
+    //event listeners for move/resize
+    noteHeaderEl.addEventListener('mousePressed', function() { toFront(this); this.move(); });
+    noteResizeEl.addEventListener('mousePressed', function() { toFront(this); this.resize(); });
+
+    //temp listener
+    noteInputEl.addEventListener('click', this.unrender);
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
@@ -50,6 +66,7 @@ function Note() {
     noteEl.appendChild(noteResizeEl);
     bodyEl.appendChild(noteEl);
   }
+  
 }
 
 var note = new Note();
