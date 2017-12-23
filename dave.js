@@ -39,10 +39,14 @@ function Note() {
     //get elements
     var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
-    var noteHeaderEl = document.createElement('div');
+    var noteFilterEl = document.createElement('div');
+    var noteMarginTop = document.createElement('div');
+    var noteMarginRight = document.createElement('div');
+    var noteMarginBottom = document.createElement('div');
+    var noteMarginLeft = document.createElement('div');
+    var noteTitleEl = document.createElement('textarea');
     var noteInputEl = document.createElement('textarea');
     var noteResizeEl = document.createElement('div');
-    var noteFilterEl = document.createElement('div');
 
     //set position and size for note
     noteEl.style.top = this.coords[1] + 'px';
@@ -57,22 +61,30 @@ function Note() {
     noteEl.setAttribute('class', 'note');
     noteEl.setAttribute('id', this.id);
     noteFilterEl.setAttribute('class', 'noteFilter');
-    noteHeaderEl.setAttribute('class', 'noteHeader');
+    noteMarginTop.setAttribute('class', 'noteMarginTop');
+    noteMarginRight.setAttribute('class', 'noteMarginRight');
+    noteMarginBottom.setAttribute('class', 'noteMarginBottom');
+    noteMarginLeft.setAttribute('class', 'noteMarginLeft');
+    noteTitleEl.setAttribute('class', 'noteTitle');
     noteInputEl.setAttribute('class' ,'noteInput');
     noteResizeEl.setAttribute('class', 'noteResize');
 
     //event listeners
-    noteHeaderEl.addEventListener('mousedown', this.startMove.bind(this));
+    noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
     noteResizeEl.addEventListener('mousedown', this.startResize.bind(this));
     noteInputEl.addEventListener('change', this.save.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
 
     //build note element and attach to DOM
+    bodyEl.appendChild(noteEl);
     noteEl.appendChild(noteFilterEl);
-    noteEl.appendChild(noteHeaderEl);
+    noteEl.appendChild(noteMarginTop);
+    noteEl.appendChild(noteMarginRight);
+    noteEl.appendChild(noteMarginBottom);
+    noteEl.appendChild(noteMarginLeft);
+    noteEl.appendChild(noteTitleEl);
     noteEl.appendChild(noteInputEl);
     noteEl.appendChild(noteResizeEl);
-    bodyEl.appendChild(noteEl);
   }
   
   //handles moving the note, initiated with startMove
