@@ -64,9 +64,7 @@ function Note() {
     //event listeners
     noteHeaderEl.addEventListener('mousedown', this.startMove.bind(this));
     noteResizeEl.addEventListener('mousedown', this.startResize.bind(this));
-    noteInputEl.addEventListener('keyup', this.save.bind(this));
-    //noteInputEl.addEventListener('cut', this.save.bind(this));
-    //noteInputEl.addEventListener('paste', this.save.bind(this));
+    noteInputEl.addEventListener('change', this.save.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
 
     //build note element and attach to DOM
