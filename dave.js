@@ -62,8 +62,9 @@ function Note() {
     noteResizeEl.setAttribute('class', 'noteResize');
 
     //event listeners for move/resize
-    noteInputEl.addEventListener('mousedown', this.startMove.bind(this));
-    window.addEventListener('mouseup', this.stopMove.bind(this));
+    noteHeaderEl.addEventListener('mousedown', this.startMove.bind(this));
+    noteResizeEl.addEventListener('mousedown', this.startResize.bind(this));
+    window.addEventListener('mouseup', this.stopInterval.bind(this));
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
@@ -72,21 +73,26 @@ function Note() {
     bodyEl.appendChild(noteEl);
   }
   
+  //handles moving the note, initiated with startMove
   this.move = function() {
     this.coords = [mouseX, mouseY];
     this.unrender();
     this.render();
   }
   
-  var moveInterval = 0;
-  this.startMove = function() {
-    this.move.bind(this);
-    moveInterval = setInterval(this.move.bind(this), 10);
+  //handles resizing the note, initiated with startResize
+  this.resize = function() {
+    this.width = mouseX - this.coords[0];
+    this.height = mouseY - this.coords[1];
+    this.unrender();
+    this.render();
   }
 
-  this.stopMove = function() {
-    clearInterval(moveInterval);
-  }
+  //intervals for move and resize functions
+  var interval = 0;
+  this.startMove = function() { interval = setInterval(this.move.bind(this), 10); }
+  this.startResize = function() { interval = setInterval(this.resize.bind(this), 10); }
+  this.stopInterval = function() { clearInterval(interval); }
 
 }
 
