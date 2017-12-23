@@ -1,13 +1,11 @@
 'use strict';
 
+//global variables to hold current cursor location
 var mouseX = 0;
 var mouseY = 0;
-document.onmousemove = getMouse;
-
-function getMouse(e) {
+document.onmousemove = function(e) {
   mouseX = e.clientX;
   mouseY = e.clientY;
-//  console.log(mouseX + ' ' + mouseY);
 }
 
 Note.notes = [];
@@ -65,7 +63,7 @@ function Note() {
 
     //event listeners for move/resize
     noteInputEl.addEventListener('mousedown', this.startMove.bind(this));
-    noteInputEl.addEventListener('mouseup', this.stopMove.bind(this));
+    window.addEventListener('mouseup', this.stopMove.bind(this));
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
@@ -83,7 +81,7 @@ function Note() {
   var moveInterval = 0;
   this.startMove = function() {
     this.move.bind(this);
-    moveInterval = setInterval(this.move.bind(this), 25);
+    moveInterval = setInterval(this.move.bind(this), 10);
   }
 
   this.stopMove = function() {
