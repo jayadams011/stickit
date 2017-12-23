@@ -65,6 +65,8 @@ function Note() {
     noteHeaderEl.addEventListener('mousedown', this.startMove.bind(this));
     noteResizeEl.addEventListener('mousedown', this.startResize.bind(this));
     noteInputEl.addEventListener('keyup', this.save.bind(this));
+    //noteInputEl.addEventListener('cut', this.save.bind(this));
+    //noteInputEl.addEventListener('paste', this.save.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
 
     //build note element and attach to DOM
@@ -86,6 +88,8 @@ function Note() {
   this.resize = function() {
     this.width = mouseX - this.coords[0];
     this.height = mouseY - this.coords[1];
+    if (this.width < 40) this.width = 40;
+    if (this.height < 40) this.height = 40;
     this.unrender();
     this.render();
   }

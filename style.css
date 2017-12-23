@@ -7,6 +7,8 @@
 .note {
   position: relative;
   background-color: yellow;
+  min-width: 40px;
+  min-height: 40px;
 }
 
 .noteFilter {
@@ -38,8 +40,8 @@
   border: none;
   outline: none;
   resize: none;
+  overflow: hidden;
   background-color: rgba(0,0,0,0);
-  opacity: 1.2;
 }
 
 .noteResize {
