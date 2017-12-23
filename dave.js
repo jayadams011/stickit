@@ -61,9 +61,10 @@ function Note() {
     noteInputEl.setAttribute('class' ,'noteInput');
     noteResizeEl.setAttribute('class', 'noteResize');
 
-    //event listeners for move/resize
+    //event listeners
     noteHeaderEl.addEventListener('mousedown', this.startMove.bind(this));
     noteResizeEl.addEventListener('mousedown', this.startResize.bind(this));
+    noteInputEl.addEventListener('keyup', this.save.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
 
     //build note element and attach to DOM
@@ -99,6 +100,7 @@ function Note() {
   this.startResize = function() { interval = setInterval(this.resize.bind(this), 10); }
   this.stopInterval = function() { clearInterval(interval); }
 
+  this.save = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
 }
 
 var note = new Note();
