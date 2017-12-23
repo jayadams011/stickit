@@ -73,7 +73,7 @@ function Note() {
     noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
     noteMarginRight.addEventListener('mousedown', this.startEWResize.bind(this));
     noteMarginBottom.addEventListener('mousedown', this.startNSResize.bind(this));
-    noteMarginLeft.addEventListener('mousedown', this.startEWResize.bind(this));
+    noteMarginLeft.addEventListener('mousedown', this.startEWResize.bind(this, 'l'));
     noteResizeEl.addEventListener('mousedown', this.startNWSEResize.bind(this));
     noteInputEl.addEventListener('change', this.save.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
@@ -135,7 +135,7 @@ function Note() {
   }
   this.startNWSEResize = function() { interval = setInterval(this.nwseResize.bind(this), 10); }
   this.startNSResize = function() { interval = setInterval(this.nsResize.bind(this), 10); }
-  this.startEWResize = function() { interval = setInterval(this.ewResize.bind(this), 10); }
+  this.startEWResize = function(side) { interval = setInterval(this.ewResize.bind(this, side), 10); }
   this.stopInterval = function() { clearInterval(interval); }
 
   this.save = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
