@@ -1,5 +1,15 @@
 'use strict';
 
+var mouseX = 0;
+var mouseY = 0;
+document.onmousemove = getMouse;
+
+function getMouse(e) {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+//  console.log(mouseX + ' ' + mouseY);
+}
+
 Note.notes = [];
 function Note() {
 
@@ -54,11 +64,8 @@ function Note() {
     noteResizeEl.setAttribute('class', 'noteResize');
 
     //event listeners for move/resize
-    noteHeaderEl.addEventListener('mousePressed', function() { toFront(this); this.move(); });
-    noteResizeEl.addEventListener('mousePressed', function() { toFront(this); this.resize(); });
-
-    //temp listener
-    noteInputEl.addEventListener('click', this.unrender);
+    noteInputEl.addEventListener('mousedown', this.startMove.bind(this));
+    noteInputEl.addEventListener('mouseup', this.stopMove.bind(this));
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
@@ -67,6 +74,22 @@ function Note() {
     bodyEl.appendChild(noteEl);
   }
   
+  this.move = function() {
+    this.coords = [mouseX, mouseY];
+    this.unrender();
+    this.render();
+  }
+  
+  var moveInterval = 0;
+  this.startMove = function() {
+    this.move.bind(this);
+    moveInterval = setInterval(this.move.bind(this), 25);
+  }
+
+  this.stopMove = function() {
+    clearInterval(moveInterval);
+  }
+
 }
 
 var note = new Note();
