@@ -40,12 +40,12 @@ function Note() {
     var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
     var noteFilterEl = document.createElement('div');
+    var noteTitleEl = document.createElement('textarea');
+    var noteInputEl = document.createElement('textarea');
     var noteMarginTop = document.createElement('div');
     var noteMarginRight = document.createElement('div');
     var noteMarginBottom = document.createElement('div');
     var noteMarginLeft = document.createElement('div');
-    var noteTitleEl = document.createElement('textarea');
-    var noteInputEl = document.createElement('textarea');
     var noteResizeEl = document.createElement('div');
 
     //set position and size for note
@@ -61,29 +61,32 @@ function Note() {
     noteEl.setAttribute('class', 'note');
     noteEl.setAttribute('id', this.id);
     noteFilterEl.setAttribute('class', 'noteFilter');
+    noteTitleEl.setAttribute('class', 'noteTitle');
+    noteInputEl.setAttribute('class' ,'noteInput');
     noteMarginTop.setAttribute('class', 'noteMarginTop');
     noteMarginRight.setAttribute('class', 'noteMarginRight');
     noteMarginBottom.setAttribute('class', 'noteMarginBottom');
     noteMarginLeft.setAttribute('class', 'noteMarginLeft');
-    noteTitleEl.setAttribute('class', 'noteTitle');
-    noteInputEl.setAttribute('class' ,'noteInput');
     noteResizeEl.setAttribute('class', 'noteResize');
 
     //event listeners
-    noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
-    noteResizeEl.addEventListener('mousedown', this.startResize.bind(this));
+    noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
+    noteMarginRight.addEventListener('mousedown', this.startEWResize.bind(this));
+    noteMarginBottom.addEventListener('mousedown', this.startNSResize.bind(this));
+    noteMarginLeft.addEventListener('mousedown', this.startEWResize.bind(this));
+    noteResizeEl.addEventListener('mousedown', this.startNWSEResize.bind(this));
     noteInputEl.addEventListener('change', this.save.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
 
     //build note element and attach to DOM
     bodyEl.appendChild(noteEl);
     noteEl.appendChild(noteFilterEl);
+    noteEl.appendChild(noteTitleEl);
+    noteEl.appendChild(noteInputEl);
     noteEl.appendChild(noteMarginTop);
     noteEl.appendChild(noteMarginRight);
     noteEl.appendChild(noteMarginBottom);
     noteEl.appendChild(noteMarginLeft);
-    noteEl.appendChild(noteTitleEl);
-    noteEl.appendChild(noteInputEl);
     noteEl.appendChild(noteResizeEl);
   }
   
@@ -94,12 +97,31 @@ function Note() {
     this.render();
   }
   
-  //handles resizing the note, initiated with startResize
-  this.resize = function() {
+  //handle resizing the note
+  var minWidth = 40;
+  var minHeight = 40;
+  this.nwseResize = function() {
     this.width = mouseX - this.coords[0];
     this.height = mouseY - this.coords[1];
-    if (this.width < 40) this.width = 40;
-    if (this.height < 40) this.height = 40;
+    if (this.width < minWidth) this.width = minWidth;
+    if (this.height < minHeight) this.height = minHeight;
+    this.unrender();
+    this.render();
+  }
+  this.nsResize = function() {
+    this.height = mouseY - this.coords[1];
+    if (this.height < minHeight) this.height = minHeight;
+    this.unrender();
+    this.render();
+  }
+  this.ewResize = function(side) {
+    if (side === 'l') {
+      var oldX = this.coords[0];
+      this.coords[0] = mouseX;
+      this.width -= this.coords[0] - oldX;
+    }
+    else this.width = mouseX - this.coords[0];
+    if (this.width < minWidth) this.width = minWidth;
     this.unrender();
     this.render();
   }
@@ -111,7 +133,9 @@ function Note() {
     var offsetY = mouseY - this.coords[1];
     interval = setInterval(this.move.bind(this, offsetX, offsetY), 10);
   }
-  this.startResize = function() { interval = setInterval(this.resize.bind(this), 10); }
+  this.startNWSEResize = function() { interval = setInterval(this.nwseResize.bind(this), 10); }
+  this.startNSResize = function() { interval = setInterval(this.nsResize.bind(this), 10); }
+  this.startEWResize = function() { interval = setInterval(this.ewResize.bind(this), 10); }
   this.stopInterval = function() { clearInterval(interval); }
 
   this.save = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
