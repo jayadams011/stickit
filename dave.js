@@ -12,7 +12,7 @@ Note.notes = [];
 function Note() {
 
   //the top-left corner's xy-coordinates of the format [x,y]
-  this.coords = [400,400];
+  this.coords = [500,200];
 
   //dimensions of the note in pixels
   this.height = 400;
@@ -20,7 +20,6 @@ function Note() {
  
   //the text contents of the note
   this.contents = '';
-  this.title = '';
 
   //object id for use with unrender function
   this.id = 'note' + Note.notes.length;
@@ -43,6 +42,7 @@ function Note() {
     var noteHeaderEl = document.createElement('div');
     var noteInputEl = document.createElement('textarea');
     var noteResizeEl = document.createElement('div');
+    var noteFilterEl = document.createElement('div');
 
     //set position and size for note
     noteEl.style.top = this.coords[1] + 'px';
@@ -52,11 +52,11 @@ function Note() {
 
     //add content to note
     noteInputEl.textContent = this.contents;
-    noteHeaderEl.textContent = this.title;
 
     //set classes and ids to be used by styles and scripts
     noteEl.setAttribute('class', 'note');
     noteEl.setAttribute('id', this.id);
+    noteFilterEl.setAttribute('class', 'noteFilter');
     noteHeaderEl.setAttribute('class', 'noteHeader');
     noteInputEl.setAttribute('class' ,'noteInput');
     noteResizeEl.setAttribute('class', 'noteResize');
@@ -67,6 +67,7 @@ function Note() {
     window.addEventListener('mouseup', this.stopInterval.bind(this));
 
     //build note element and attach to DOM
+    noteEl.appendChild(noteFilterEl);
     noteEl.appendChild(noteHeaderEl);
     noteEl.appendChild(noteInputEl);
     noteEl.appendChild(noteResizeEl);
@@ -74,8 +75,8 @@ function Note() {
   }
   
   //handles moving the note, initiated with startMove
-  this.move = function() {
-    this.coords = [mouseX, mouseY];
+  this.move = function(offsetX, offsetY) {
+    this.coords = [mouseX - offsetX, mouseY - offsetY];
     this.unrender();
     this.render();
   }
@@ -90,7 +91,11 @@ function Note() {
 
   //intervals for move and resize functions
   var interval = 0;
-  this.startMove = function() { interval = setInterval(this.move.bind(this), 10); }
+  this.startMove = function() { 
+    var offsetX = mouseX - this.coords[0];
+    var offsetY = mouseY - this.coords[1];
+    interval = setInterval(this.move.bind(this, offsetX, offsetY), 10);
+  }
   this.startResize = function() { interval = setInterval(this.resize.bind(this), 10); }
   this.stopInterval = function() { clearInterval(interval); }
 
