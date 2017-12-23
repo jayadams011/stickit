@@ -54,11 +54,19 @@ function Note() {
     noteResizeEl.setAttribute('class', 'noteResize');
 
     //event listeners for move/resize
-    noteHeaderEl.addEventListener('mousePressed', function() { toFront(this); this.move(); });
-    noteResizeEl.addEventListener('mousePressed', function() { toFront(this); this.resize(); });
+    this.drag = false;
 
-    //temp listener
-    noteInputEl.addEventListener('click', this.unrender.bind(this));
+    this.toggleDrag = function() {
+      if (this.drag) this.drag = false;
+      else this.drag = true;
+      console.log(this.drag);
+    }
+
+    //noteHeaderEl.addEventListener('mouseDown', function() { this.move.bind(this); });
+    //noteResizeEl.addEventListener('mousePressed', function() { this.resize.bind(this); });
+
+    noteInputEl.addEventListener('mousedown', this.move.bind(this));
+    noteInputEl.addEventListener('mouseup', this.toggleDrag.bind(this));
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
@@ -66,6 +74,17 @@ function Note() {
     noteEl.appendChild(noteResizeEl);
     bodyEl.appendChild(noteEl);
   }
+
+  this.move = function(e) {
+    this.toggleDrag();
+    //while (this.dragging) {
+      this.coords[0] = e.clientX;
+      this.coords[1] = e.clientY;
+      this.unrender();
+      this.render();
+    //}
+  }
+
   
 }
 
