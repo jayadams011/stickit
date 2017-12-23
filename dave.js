@@ -73,12 +73,14 @@ function Note() {
     bodyEl.appendChild(noteEl);
   }
   
+  //handles moving the note, initiated with startMove
   this.move = function() {
     this.coords = [mouseX, mouseY];
     this.unrender();
     this.render();
   }
   
+  //handles resizing the note, initiated with startResize
   this.resize = function() {
     this.width = mouseX - this.coords[0];
     this.height = mouseY - this.coords[1];
@@ -86,19 +88,11 @@ function Note() {
     this.render();
   }
 
+  //intervals for move and resize functions
   var interval = 0;
-  this.startMove = function() {
-    interval = setInterval(this.move.bind(this), 10);
-  }
-
-  this.startResize = function() {
-    interval = setInterval(this.resize.bind(this), 10);
-  }
-    
-
-  this.stopInterval = function() {
-    clearInterval(interval);
-  }
+  this.startMove = function() { interval = setInterval(this.move.bind(this), 10); }
+  this.startResize = function() { interval = setInterval(this.resize.bind(this), 10); }
+  this.stopInterval = function() { clearInterval(interval); }
 
 }
 
