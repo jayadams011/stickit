@@ -1,5 +1,15 @@
 'use strict';
 
+var mouseX = 0;
+var mouseY = 0;
+document.onmousemove = getMouse;
+
+function getMouse(e) {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+//  console.log(mouseX + ' ' + mouseY);
+}
+
 Note.notes = [];
 function Note() {
 
@@ -54,19 +64,7 @@ function Note() {
     noteResizeEl.setAttribute('class', 'noteResize');
 
     //event listeners for move/resize
-    this.drag = false;
-
-    this.toggleDrag = function() {
-      if (this.drag) this.drag = false;
-      else this.drag = true;
-      console.log(this.drag);
-    }
-
-    //noteHeaderEl.addEventListener('mouseDown', function() { this.move.bind(this); });
-    //noteResizeEl.addEventListener('mousePressed', function() { this.resize.bind(this); });
-
-    noteInputEl.addEventListener('mousedown', this.move.bind(this));
-    noteInputEl.addEventListener('mouseup', this.toggleDrag.bind(this));
+    noteInputEl.addEventListener('mousedown', function() { setInterval(console.log(mouseX + ' ' + mouseY), 100); });
 
     //build note element and attach to DOM
     noteEl.appendChild(noteHeaderEl);
@@ -75,17 +73,6 @@ function Note() {
     bodyEl.appendChild(noteEl);
   }
 
-  this.move = function(e) {
-    this.toggleDrag();
-    //while (this.dragging) {
-      this.coords[0] = e.clientX;
-      this.coords[1] = e.clientY;
-      this.unrender();
-      this.render();
-    //}
-  }
-
-  
 }
 
 var note = new Note();
