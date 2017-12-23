@@ -1,7 +1,53 @@
+/*
 * {
-  outline: 1px dotted orange;
+ outline: 1px dotted orange;
 } 
+*/
 
 .note {
-  position: absolute;
+  position: relative;
+  background-color: yellow;
 }
+
+.noteFilter {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: .2;
+  background-color: blue;
+}
+
+.noteHeader {
+  position: absolute;
+  top: 0px; 
+  width: 100%;
+  height: 20px;
+  cursor: move;
+}
+
+.noteInput {
+  position: absolute;
+  width: calc(100% - 30px);
+  height: calc(100% - 20px);
+  top: 20px;
+  bottom: 0px;
+  padding: 0 15px;
+  color: #000;
+  border: none;
+  outline: none;
+  resize: none;
+  background-color: rgba(0,0,0,0);
+  opacity: 1.2;
+}
+
+.noteResize {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  right: 0px;
+  bottom: 0px;
+  cursor: nwse-resize;
+}
+
