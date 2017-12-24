@@ -36,6 +36,9 @@ function Note() {
   }
   
   this.render = function() {
+    //unrender if already on screen
+    if (document.getElementById(this.id)) this.unrender();
+
     //create Elements
     var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
@@ -98,7 +101,6 @@ function Note() {
   //handles moving the note, initiated with startMove
   this.move = function(offsetX, offsetY) {
     this.coords = [mouseX - offsetX, mouseY - offsetY];
-    this.unrender();
     this.render();
   }
   
@@ -110,19 +112,16 @@ function Note() {
     this.height = mouseY - this.coords[1];
     if (this.width < minWidth) this.width = minWidth;
     if (this.height < minHeight) this.height = minHeight;
-    this.unrender();
     this.render();
   }
   this.nsResize = function() {
     this.height = mouseY - this.coords[1];
     if (this.height < minHeight) this.height = minHeight;
-    this.unrender();
     this.render();
   }
   this.rewResize = function() {
     this.width = mouseX - this.coords[0];
     if (this.width < minWidth) this.width = minWidth;
-    this.unrender();
     this.render();
   }
   this.lewResize = function() {
@@ -133,7 +132,6 @@ function Note() {
       this.width = minWidth;
       this.coords[0] = oldX;
     }
-    this.unrender();
     this.render();
   }
 
@@ -158,7 +156,6 @@ function Note() {
   //set color of note
   this.setfColor = function(color) {
     this.filterColor = color;
-    this.unrender();
     this.render();
   }
 }
