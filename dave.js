@@ -26,7 +26,7 @@ function Note() {
   this.id = 'note' + Note.notes.length;
 
   //For use with note color stretch goal
-  this.filterColor = '#fff';
+  this.filterColor = '#ff0';
 
   Note.notes.push(this);
   
