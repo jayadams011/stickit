@@ -38,7 +38,7 @@ function Note() {
   this.filterColor = '#ff0';
 
   Note.notes.push(this);
-  
+
   this.unrender = function() {
     var noteEl = document.getElementById(this.id);
     noteEl.parentNode.removeChild(noteEl);
@@ -156,7 +156,8 @@ function Note() {
   this.startNSResize = function(e) { e.preventDefault(); interval = setInterval(this.nsResize.bind(this), 10); }
   this.startLEWResize = function(e) { e.preventDefault(); interval = setInterval(this.lewResize.bind(this), 10); }
   this.startREWResize = function(e) { e.preventDefault(); interval = setInterval(this.rewResize.bind(this), 10); }
-  this.stopInterval = function() {
+  this.stopInterval = function(e) {
+    e.preventDefault();
     Note.saveNotes();
     clearInterval(interval);
   }
