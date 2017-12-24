@@ -16,7 +16,7 @@ function Note() {
 
   //dimensions of the note in pixels
   this.height = 250;
-  this.width = 300;
+  this.width = 250;
  
   //the text contents of the note
   this.title = 'My Note';
@@ -77,9 +77,9 @@ function Note() {
     noteTitleEl.addEventListener('change', this.saveTitle.bind(this));
     noteInputEl.addEventListener('change', this.saveInput.bind(this));
     noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
-    noteMarginRight.addEventListener('mousedown', this.startEWResize.bind(this, 'r'));
+    noteMarginRight.addEventListener('mousedown', this.startREWResize.bind(this));
     noteMarginBottom.addEventListener('mousedown', this.startNSResize.bind(this));
-    noteMarginLeft.addEventListener('mousedown', this.startEWResize.bind(this, 'l'));
+    noteMarginLeft.addEventListener('mousedown', this.startLEWResize.bind(this));
     noteResizeEl.addEventListener('mousedown', this.startNWSEResize.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
 
@@ -103,8 +103,8 @@ function Note() {
   }
   
   //handle resizing the note
-  var minWidth = 200;
-  var minHeight = 200;
+  var minWidth = 150;
+  var minHeight = 150;
   this.nwseResize = function() {
     this.width = mouseX - this.coords[0];
     this.height = mouseY - this.coords[1];
@@ -119,28 +119,36 @@ function Note() {
     this.unrender();
     this.render();
   }
-  this.ewResize = function(side) {
-    if (side === 'l') {
-      var oldX = this.coords[0];
-      this.coords[0] = mouseX;
-      this.width -= this.coords[0] - oldX;
-    }
-    else this.width = mouseX - this.coords[0];
+  this.rewResize = function() {
+    this.width = mouseX - this.coords[0];
     if (this.width < minWidth) this.width = minWidth;
+    this.unrender();
+    this.render();
+  }
+  this.lewResize = function() {
+    var oldX = this.coords[0];
+    this.coords[0] = mouseX;
+    this.width -= this.coords[0] - oldX;
+    if (this.width < minWidth) {
+      this.width = minWidth;
+      this.coords[0] = oldX;
+    }
     this.unrender();
     this.render();
   }
 
   //intervals for move and resize functions
   var interval = 0;
-  this.startMove = function() { 
+  this.startMove = function(e) { 
+    e.preventDefault();
     var offsetX = mouseX - this.coords[0];
     var offsetY = mouseY - this.coords[1];
     interval = setInterval(this.move.bind(this, offsetX, offsetY), 10);
   }
-  this.startNWSEResize = function() { interval = setInterval(this.nwseResize.bind(this), 10); }
-  this.startNSResize = function() { interval = setInterval(this.nsResize.bind(this), 10); }
-  this.startEWResize = function(side) { interval = setInterval(this.ewResize.bind(this, side), 10); }
+  this.startNWSEResize = function(e) { e.preventDefault(); interval = setInterval(this.nwseResize.bind(this), 10); }
+  this.startNSResize = function(e) { e.preventDefault(); interval = setInterval(this.nsResize.bind(this), 10); }
+  this.startLEWResize = function(e) { e.preventDefault(); interval = setInterval(this.lewResize.bind(this), 10); }
+  this.startREWResize = function(e) { e.preventDefault(); interval = setInterval(this.rewResize.bind(this), 10); }
   this.stopInterval = function() { clearInterval(interval); }
 
   //save contents of note before unrendering
@@ -148,5 +156,7 @@ function Note() {
   this.saveInput = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
 }
 
-var note = new Note();
-note.render();
+for (var i = 0; i < 18; i++) {
+  var note = new Note();
+  note.render();
+}
