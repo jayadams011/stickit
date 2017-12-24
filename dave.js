@@ -15,10 +15,11 @@ function Note() {
   this.coords = [500,200];
 
   //dimensions of the note in pixels
-  this.height = 400;
-  this.width = 400;
+  this.height = 250;
+  this.width = 300;
  
   //the text contents of the note
+  this.title = 'My Note';
   this.contents = '';
 
   //object id for use with unrender function
@@ -36,13 +37,17 @@ function Note() {
   }
   
   this.render = function() {
-    //get elements
+    //create Elements
     var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
-    var noteHeaderEl = document.createElement('div');
-    var noteInputEl = document.createElement('textarea');
-    var noteResizeEl = document.createElement('div');
     var noteFilterEl = document.createElement('div');
+    var noteTitleEl = document.createElement('input');
+    var noteInputEl = document.createElement('textarea');
+    var noteMarginTop = document.createElement('div');
+    var noteMarginRight = document.createElement('div');
+    var noteMarginBottom = document.createElement('div');
+    var noteMarginLeft = document.createElement('div');
+    var noteResizeEl = document.createElement('div');
 
     //set position and size for note
     noteEl.style.top = this.coords[1] + 'px';
@@ -51,28 +56,43 @@ function Note() {
     noteEl.style.width = this.width + 'px';
 
     //add content to note
+    noteTitleEl.value = this.title;
     noteInputEl.textContent = this.contents;
 
-    //set classes and ids to be used by styles and scripts
+    //set attributes, esp. classes to be used by styles and scripts
     noteEl.setAttribute('class', 'note');
     noteEl.setAttribute('id', this.id);
     noteFilterEl.setAttribute('class', 'noteFilter');
-    noteHeaderEl.setAttribute('class', 'noteHeader');
+    noteTitleEl.setAttribute('class', 'noteTitle');
+    noteTitleEl.setAttribute('type', 'text');
     noteInputEl.setAttribute('class' ,'noteInput');
+    noteMarginTop.setAttribute('class', 'noteMarginTop');
+    noteMarginRight.setAttribute('class', 'noteMarginRight');
+    noteMarginBottom.setAttribute('class', 'noteMarginBottom');
+    noteMarginLeft.setAttribute('class', 'noteMarginLeft');
     noteResizeEl.setAttribute('class', 'noteResize');
 
     //event listeners
-    noteHeaderEl.addEventListener('mousedown', this.startMove.bind(this));
-    noteResizeEl.addEventListener('mousedown', this.startResize.bind(this));
-    noteInputEl.addEventListener('keyup', this.save.bind(this));
+    noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
+    noteTitleEl.addEventListener('change', this.saveTitle.bind(this));
+    noteInputEl.addEventListener('change', this.saveInput.bind(this));
+    noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
+    noteMarginRight.addEventListener('mousedown', this.startEWResize.bind(this, 'r'));
+    noteMarginBottom.addEventListener('mousedown', this.startNSResize.bind(this));
+    noteMarginLeft.addEventListener('mousedown', this.startEWResize.bind(this, 'l'));
+    noteResizeEl.addEventListener('mousedown', this.startNWSEResize.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
 
     //build note element and attach to DOM
-    noteEl.appendChild(noteFilterEl);
-    noteEl.appendChild(noteHeaderEl);
-    noteEl.appendChild(noteInputEl);
-    noteEl.appendChild(noteResizeEl);
     bodyEl.appendChild(noteEl);
+    noteEl.appendChild(noteFilterEl);
+    noteEl.appendChild(noteTitleEl);
+    noteEl.appendChild(noteInputEl);
+    noteEl.appendChild(noteMarginTop);
+    noteEl.appendChild(noteMarginRight);
+    noteEl.appendChild(noteMarginBottom);
+    noteEl.appendChild(noteMarginLeft);
+    noteEl.appendChild(noteResizeEl);
   }
   
   //handles moving the note, initiated with startMove
@@ -82,10 +102,31 @@ function Note() {
     this.render();
   }
   
-  //handles resizing the note, initiated with startResize
-  this.resize = function() {
+  //handle resizing the note
+  var minWidth = 200;
+  var minHeight = 200;
+  this.nwseResize = function() {
     this.width = mouseX - this.coords[0];
     this.height = mouseY - this.coords[1];
+    if (this.width < minWidth) this.width = minWidth;
+    if (this.height < minHeight) this.height = minHeight;
+    this.unrender();
+    this.render();
+  }
+  this.nsResize = function() {
+    this.height = mouseY - this.coords[1];
+    if (this.height < minHeight) this.height = minHeight;
+    this.unrender();
+    this.render();
+  }
+  this.ewResize = function(side) {
+    if (side === 'l') {
+      var oldX = this.coords[0];
+      this.coords[0] = mouseX;
+      this.width -= this.coords[0] - oldX;
+    }
+    else this.width = mouseX - this.coords[0];
+    if (this.width < minWidth) this.width = minWidth;
     this.unrender();
     this.render();
   }
@@ -97,10 +138,14 @@ function Note() {
     var offsetY = mouseY - this.coords[1];
     interval = setInterval(this.move.bind(this, offsetX, offsetY), 10);
   }
-  this.startResize = function() { interval = setInterval(this.resize.bind(this), 10); }
+  this.startNWSEResize = function() { interval = setInterval(this.nwseResize.bind(this), 10); }
+  this.startNSResize = function() { interval = setInterval(this.nsResize.bind(this), 10); }
+  this.startEWResize = function(side) { interval = setInterval(this.ewResize.bind(this, side), 10); }
   this.stopInterval = function() { clearInterval(interval); }
 
-  this.save = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
+  //save contents of note before unrendering
+  this.saveTitle = function() { this.title = document.getElementById(this.id).childNodes[1].value; }
+  this.saveInput = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
 }
 
 var note = new Note();

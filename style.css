@@ -17,29 +17,69 @@
   height: 100%;
   opacity: .2;
   background-color: blue;
+  cursor: move;
 }
 
-.noteHeader {
+.noteMarginTop {
   position: absolute;
-  top: 0px; 
+  top: 0px;
   width: 100%;
-  height: 20px;
+  height: 5px;
   cursor: move;
+}
+
+.noteMarginRight {
+  position: absolute;
+  top: 5px;
+  bottom: 0px;
+  right: 0px;
+  width: 5px;
+  height: calc(100% - 10px);
+  cursor: ew-resize;
+}
+
+.noteMarginBottom {
+  position: absolute;
+  bottom: 0px;
+  height: 5px;
+  width: 100%;
+  cursor: ns-resize;
+}
+
+.noteMarginLeft {
+  position: absolute;
+  top: 5px;
+  bottom: 0px;
+  left: 0px;
+  width: 5px;
+  height: calc(100% - 10px);
+  cursor: ew-resize;
+}
+
+.note input,textarea {
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0);
+}
+
+.noteTitle {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  height: 20px;
+  font-weight: bold;
+  border-bottom: 1px #000 solid !important;
 }
 
 .noteInput {
   position: absolute;
-  width: calc(100% - 30px);
-  height: calc(100% - 20px);
-  top: 20px;
-  bottom: 0px;
-  padding: 0 15px;
+  width: calc(100% - 10px);
+  height: calc(100% - 35px);
+  top: 30px;
+  left: 5px;
   color: #000;
-  border: none;
-  outline: none;
-  resize: none;
-  background-color: rgba(0,0,0,0);
-  opacity: 1.2;
 }
 
 .noteResize {
