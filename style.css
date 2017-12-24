@@ -8,7 +8,7 @@
   position: absolute;
   background: radial-gradient(#ddd, #ccc, #aaa);
   box-shadow: 2px 2px 3px #888;
-  border: 1px solid black;
+  border: 1px solid #888;
 }
 
 .noteFilter {
@@ -71,7 +71,6 @@
   left: 5px;
   height: 20px;
   font-weight: bold;
-//  border-bottom: 1px #000 solid !important;
 }
 
 .noteInput {
