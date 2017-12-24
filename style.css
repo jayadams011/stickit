@@ -1,14 +1,12 @@
-
+/*
 * {
  outline: 1px dotted orange;
 } 
-
+*/
 
 .note {
   position: relative;
-  //background-color: yellow;
-  min-width: 40px;
-  min-height: 40px;
+  background-color: yellow;
 }
 
 .noteFilter {
@@ -19,10 +17,11 @@
   height: 100%;
   opacity: .2;
   background-color: blue;
+  cursor: move;
 }
 
 .noteMarginTop {
-  position:absolute;
+  position: absolute;
   top: 0px;
   width: 100%;
   height: 5px;
@@ -30,12 +29,12 @@
 }
 
 .noteMarginRight {
-  position:absolute;
+  position: absolute;
   top: 5px;
   bottom: 0px;
   right: 0px;
   width: 5px;
-  height: calc(100%-10px);
+  height: calc(100% - 10px);
   cursor: ew-resize;
 }
 
@@ -48,16 +47,16 @@
 }
 
 .noteMarginLeft {
-  position:absolute;
+  position: absolute;
   top: 5px;
   bottom: 0px;
   left: 0px;
   width: 5px;
-  height: calc(100%-10px);
+  height: calc(100% - 10px);
   cursor: ew-resize;
 }
 
-.note textarea {
+.note input,textarea {
   border: none;
   outline: none;
   resize: none;
@@ -67,19 +66,19 @@
 
 .noteTitle {
   position: absolute;
-  display: inline;
-  min-width: 30px;
-  top: 10px;
-  left: 10px; 
+  top: 5px;
+  left: 5px;
   height: 20px;
+  font-weight: bold;
+  border-bottom: 1px #000 solid !important;
 }
 
 .noteInput {
   position: absolute;
-  width: calc(100% - 30px);
-  height: calc(100% - 30px);
+  width: calc(100% - 10px);
+  height: calc(100% - 35px);
   top: 30px;
-  margin: 10px;
+  left: 5px;
   color: #000;
 }
 

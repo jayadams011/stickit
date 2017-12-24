@@ -15,10 +15,11 @@ function Note() {
   this.coords = [500,200];
 
   //dimensions of the note in pixels
-  this.height = 400;
-  this.width = 400;
+  this.height = 250;
+  this.width = 300;
  
   //the text contents of the note
+  this.title = 'My Note';
   this.contents = '';
 
   //object id for use with unrender function
@@ -36,11 +37,11 @@ function Note() {
   }
   
   this.render = function() {
-    //get elements
+    //create Elements
     var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
     var noteFilterEl = document.createElement('div');
-    var noteTitleEl = document.createElement('textarea');
+    var noteTitleEl = document.createElement('input');
     var noteInputEl = document.createElement('textarea');
     var noteMarginTop = document.createElement('div');
     var noteMarginRight = document.createElement('div');
@@ -55,13 +56,15 @@ function Note() {
     noteEl.style.width = this.width + 'px';
 
     //add content to note
+    noteTitleEl.value = this.title;
     noteInputEl.textContent = this.contents;
 
-    //set classes and ids to be used by styles and scripts
+    //set attributes, esp. classes to be used by styles and scripts
     noteEl.setAttribute('class', 'note');
     noteEl.setAttribute('id', this.id);
     noteFilterEl.setAttribute('class', 'noteFilter');
     noteTitleEl.setAttribute('class', 'noteTitle');
+    noteTitleEl.setAttribute('type', 'text');
     noteInputEl.setAttribute('class' ,'noteInput');
     noteMarginTop.setAttribute('class', 'noteMarginTop');
     noteMarginRight.setAttribute('class', 'noteMarginRight');
@@ -70,12 +73,14 @@ function Note() {
     noteResizeEl.setAttribute('class', 'noteResize');
 
     //event listeners
+    noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
+    noteTitleEl.addEventListener('change', this.saveTitle.bind(this));
+    noteInputEl.addEventListener('change', this.saveInput.bind(this));
     noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
-    noteMarginRight.addEventListener('mousedown', this.startEWResize.bind(this));
+    noteMarginRight.addEventListener('mousedown', this.startEWResize.bind(this, 'r'));
     noteMarginBottom.addEventListener('mousedown', this.startNSResize.bind(this));
     noteMarginLeft.addEventListener('mousedown', this.startEWResize.bind(this, 'l'));
     noteResizeEl.addEventListener('mousedown', this.startNWSEResize.bind(this));
-    noteInputEl.addEventListener('change', this.save.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
 
     //build note element and attach to DOM
@@ -98,8 +103,8 @@ function Note() {
   }
   
   //handle resizing the note
-  var minWidth = 40;
-  var minHeight = 40;
+  var minWidth = 200;
+  var minHeight = 200;
   this.nwseResize = function() {
     this.width = mouseX - this.coords[0];
     this.height = mouseY - this.coords[1];
@@ -138,7 +143,9 @@ function Note() {
   this.startEWResize = function(side) { interval = setInterval(this.ewResize.bind(this, side), 10); }
   this.stopInterval = function() { clearInterval(interval); }
 
-  this.save = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
+  //save contents of note before unrendering
+  this.saveTitle = function() { this.title = document.getElementById(this.id).childNodes[1].value; }
+  this.saveInput = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
 }
 
 var note = new Note();
