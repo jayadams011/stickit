@@ -9,6 +9,15 @@ document.onmousemove = function(e) {
 }
 
 Note.notes = [];
+Note.saveNotes = function() { localStorage.notes = JSON.stringify(Note.notes); }
+Note.loadNotes = function() {
+  var objArr = JSON.parse(localStorage.notes);
+  for (var i = 0; i < objArr.length; i++) {
+    Note.notes[i] = Object.assign(new Note(), objArr[i]);
+    Note.notes[i].render();
+  }
+}
+
 function Note() {
 
   //the top-left corner's xy-coordinates of the format [x,y]
@@ -77,8 +86,8 @@ function Note() {
 
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
-    noteTitleEl.addEventListener('change', this.saveTitle.bind(this));
-    noteInputEl.addEventListener('change', this.saveInput.bind(this));
+    noteTitleEl.addEventListener('change', this.save.bind(this));
+    noteInputEl.addEventListener('change', this.save.bind(this));
     noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
     noteMarginRight.addEventListener('mousedown', this.startREWResize.bind(this));
     noteMarginBottom.addEventListener('mousedown', this.startNSResize.bind(this));
@@ -147,11 +156,17 @@ function Note() {
   this.startNSResize = function(e) { e.preventDefault(); interval = setInterval(this.nsResize.bind(this), 10); }
   this.startLEWResize = function(e) { e.preventDefault(); interval = setInterval(this.lewResize.bind(this), 10); }
   this.startREWResize = function(e) { e.preventDefault(); interval = setInterval(this.rewResize.bind(this), 10); }
-  this.stopInterval = function() { clearInterval(interval); }
+  this.stopInterval = function() {
+    Note.saveNotes();
+    clearInterval(interval);
+  }
 
   //save contents of note before unrendering
-  this.saveTitle = function() { this.title = document.getElementById(this.id).childNodes[1].value; }
-  this.saveInput = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
+  this.save = function() {
+    this.title = document.getElementById(this.id).childNodes[1].value;
+    this.contents = document.getElementById(this.id).childNodes[2].value;
+    Note.saveNotes();
+  }
 
   //set color of note
   this.setfColor = function(color) {
@@ -160,5 +175,8 @@ function Note() {
   }
 }
 
-var note = new Note();
-note.render();
+function init() {
+  if (localStorage.notes) Note.loadNotes();
+}
+
+init();
