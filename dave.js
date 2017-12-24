@@ -26,8 +26,7 @@ function Note() {
   this.id = 'note' + Note.notes.length;
 
   //For use with note color stretch goal
-  //this.filter = false;
-  //this.filterColor = #fff;
+  this.filterColor = '#fff';
 
   Note.notes.push(this);
   
@@ -63,6 +62,7 @@ function Note() {
     noteEl.setAttribute('class', 'note');
     noteEl.setAttribute('id', this.id);
     noteFilterEl.setAttribute('class', 'noteFilter');
+    noteFilterEl.style.background = this.filterColor;
     noteTitleEl.setAttribute('class', 'noteTitle');
     noteTitleEl.setAttribute('type', 'text');
     noteInputEl.setAttribute('class' ,'noteInput');
@@ -154,9 +154,14 @@ function Note() {
   //save contents of note before unrendering
   this.saveTitle = function() { this.title = document.getElementById(this.id).childNodes[1].value; }
   this.saveInput = function() { this.contents = document.getElementById(this.id).childNodes[2].value; }
+
+  //set color of note
+  this.setfColor = function(color) {
+    this.filterColor = color;
+    this.unrender();
+    this.render();
+  }
 }
 
-for (var i = 0; i < 18; i++) {
-  var note = new Note();
-  note.render();
-}
+var note = new Note();
+note.render();
