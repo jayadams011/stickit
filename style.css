@@ -5,12 +5,13 @@
 */
 
 .note {
-  position: relative;
+  position: absolute;
   background-color: yellow;
+  border: 1px solid black;
 }
 
 .noteFilter {
-  position: absolute;
+  position: relative;
   top: 0px;
   bottom: 0px;
   width: 100%;
