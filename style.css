@@ -6,7 +6,7 @@
 
 .note {
   position: absolute;
-  background: radial-gradient(#ddd, #ccc, #aaa);
+  background: radial-gradient(#fff, #eee, #ddd);
   box-shadow: 2px 2px 3px #888;
   border: 1px solid #888;
 }
