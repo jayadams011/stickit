@@ -135,12 +135,10 @@ function Note() {
   }
   this.lewResize = function() {
     var oldX = this.coords[0];
+    var maxX = this.coords[0] + this.width - minWidth;
     this.coords[0] = mouseX;
+    if (this.coords[0] > maxX) this.coords[0] = maxX;
     this.width -= this.coords[0] - oldX;
-    if (this.width < minWidth) {
-      this.width = minWidth;
-      this.coords[0] = oldX;
-    }
     this.render();
   }
 
