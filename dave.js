@@ -79,7 +79,6 @@ function Note() {
     noteTitleEl.setAttribute('class', 'noteTitle');
     noteTitleEl.setAttribute('type', 'text');
     noteTitleEl.setAttribute('maxlength', '12');
-    noteTitleEl.style.borderColor = this.filterColor;
     noteTrashEl.setAttribute('class', 'noteTrash');
     noteTrashEl.textContent = 'x';
     noteInputEl.setAttribute('class' ,'noteInput');
@@ -102,6 +101,7 @@ function Note() {
     noteMarginLeft.addEventListener('mousedown', this.startLEWResize.bind(this));
     noteResizeEl.addEventListener('mousedown', this.startNWSEResize.bind(this));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
+    window.addEventListener('unload', Note.saveNotes());
 
     //build note element and attach to DOM
     bodyEl.appendChild(noteEl);
