@@ -37,6 +37,10 @@ function Note() {
   //For use with note color stretch goal
   this.filterColor = '#ff0';
 
+  //Number of degrees rotated (from -maxTilt to +maxTilt)
+  var maxTilt = 10;
+  this.tilt = (Math.random() - .5) * 2 * maxTilt;
+
   Note.notes.push(this);
 
   this.unrender = function() {
@@ -74,6 +78,7 @@ function Note() {
     //set attributes, esp. classes to be used by styles and scripts
     noteEl.setAttribute('class', 'note');
     noteEl.setAttribute('id', this.id);
+    noteEl.style.transform = 'rotate(' + this.tilt + 'deg)';
     noteFilterEl.setAttribute('class', 'noteFilter');
     noteFilterEl.style.background = this.filterColor;
     noteTitleEl.setAttribute('class', 'noteTitle');
