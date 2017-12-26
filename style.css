@@ -1,7 +1,7 @@
 /*
 * {
- outline: 1px dotted orange;
-} 
+  outline: 1px dotted orange;
+}
 */
 
 .note {
@@ -9,6 +9,12 @@
   background: radial-gradient(#fff, #eee, #ddd);
   box-shadow: 2px 2px 3px #888;
   border: 1px solid #888;
+}
+
+body {
+   background-image: url("assets/pin-board-67130_1280.jpg");
+   background-size: 100% 100%;
+   /*background-repeat: no-repeat;*/
 }
 
 .note:hover .noteTrash {
@@ -140,4 +146,3 @@
   bottom: 0px;
   cursor: nwse-resize;
 }
-
