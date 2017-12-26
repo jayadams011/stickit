@@ -12,7 +12,7 @@
 }
 
 body {
-   background-image: url("assets/pin-board-67130_1280.jpg");
+   background: url("assets/pin-board-67130_1280.jpg") no-repeat center center fixed;
    background-size: 100% 100%;
    /*background-repeat: no-repeat;*/
 }
