@@ -1,7 +1,14 @@
 * {
   outline: 1px dotted orange;
-} 
+}
 
 .note {
   position: absolute;
+}
+
+
+body {
+   background-image: url("assets/pin-board-67130_1280.jpg");
+   background-size: 100% 100%;
+   /*background-repeat: no-repeat;*/
 }
