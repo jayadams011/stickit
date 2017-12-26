@@ -14,7 +14,7 @@ Note.loadNotes = function() {
   var objArr = JSON.parse(localStorage.notes);
   for (var i = 0; i < objArr.length; i++) {
     Note.notes[i] = Object.assign(new Note(), objArr[i]);
-    Note.notes[i].render();
+    if (!Note.notes[i].trashed) Note.notes[i].render();
   }
 }
 
@@ -40,6 +40,9 @@ function Note() {
   //Number of degrees rotated (from -maxTilt to +maxTilt)
   var maxTilt = 10;
   this.tilt = (Math.random() - .5) * 2 * maxTilt;
+  
+  //indicates whether the note is invisible
+  this.trashed = false;
 
   Note.notes.push(this);
 
@@ -97,7 +100,7 @@ function Note() {
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
     noteTitleEl.addEventListener('change', this.save.bind(this));
     noteTitleEl.addEventListener('keyup', this.save.bind(this));
-    noteTrashEl.addEventListener('click', this.unrender.bind(this));
+    noteTrashEl.addEventListener('click', this.trash.bind(this));
     noteInputEl.addEventListener('change', this.save.bind(this));
     noteInputEl.addEventListener('keyup', this.save.bind(this));
     noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
@@ -185,6 +188,12 @@ function Note() {
   this.setfColor = function(color) {
     this.filterColor = color;
     this.render();
+  }
+
+  this.trash = function() {
+    this.trashed = true;
+    this.unrender();
+    Note.saveNotes();
   }
 }
 
