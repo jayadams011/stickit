@@ -89,7 +89,8 @@
   width: 20px;
   height: 20px;
   top: 5px;
-  right: 0px;
+  right: 5px;
+  text-align: right;
   color: #a88;
   font-family: courier;
   cursor: pointer;
