@@ -78,6 +78,7 @@ function Note() {
     noteFilterEl.style.background = this.filterColor;
     noteTitleEl.setAttribute('class', 'noteTitle');
     noteTitleEl.setAttribute('type', 'text');
+    noteTitleEl.setAttribute('maxlength', '12');
     noteTitleEl.style.borderColor = this.filterColor;
     noteTrashEl.setAttribute('class', 'noteTrash');
     noteTrashEl.textContent = 'x';
