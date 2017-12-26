@@ -16,8 +16,7 @@
 }
 
 .note:hover .noteTitle {
-  border-bottom-style: groove;
-  border-bottom-width: 1px;
+  border-bottom: 1px solid black;
 }
 
 .noteFilter {
@@ -94,6 +93,7 @@
   color: #a88;
   font-family: courier;
   cursor: pointer;
+  transition: 1s;
 }
 
 
