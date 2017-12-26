@@ -92,8 +92,10 @@ function Note() {
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
     noteTitleEl.addEventListener('change', this.save.bind(this));
+    noteTitleEl.addEventListener('keyup', this.save.bind(this));
     noteTrashEl.addEventListener('click', this.unrender.bind(this));
     noteInputEl.addEventListener('change', this.save.bind(this));
+    noteInputEl.addEventListener('keyup', this.save.bind(this));
     noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
     noteMarginRight.addEventListener('mousedown', this.startREWResize.bind(this));
     noteMarginBottom.addEventListener('mousedown', this.startNSResize.bind(this));
