@@ -67,6 +67,14 @@ function Note() {
     var noteMarginBottom = document.createElement('div');
     var noteMarginLeft = document.createElement('div');
     var noteResizeEl = document.createElement('div');
+    //color picker
+    var noteSetFColorEl = document.createElement('div');
+    var noteSFCYellowEl = document.createElement('div');
+    var noteSFCOrangeEl = document.createElement('div');
+    var noteSFCRedEl = document.createElement('div');
+    var noteSFCPurpleEl = document.createElement('div');
+    var noteSFCBlueEl = document.createElement('div');
+    var noteSFCGreenEl = document.createElement('div');
 
     //set position and size for note
     noteEl.style.top = this.coords[1] + 'px';
@@ -95,6 +103,13 @@ function Note() {
     noteMarginBottom.setAttribute('class', 'noteMarginBottom');
     noteMarginLeft.setAttribute('class', 'noteMarginLeft');
     noteResizeEl.setAttribute('class', 'noteResize');
+    noteSetFColorEl.setAttribute('class', 'noteSetFColor');
+    noteSFCYellowEl.style.background = 'yellow';
+    noteSFCOrangeEl.style.background = 'orange';
+    noteSFCRedEl.style.background = 'red';
+    noteSFCPurpleEl.style.background = 'purple';
+    noteSFCBlueEl.style.background = 'blue';
+    noteSFCGreenEl.style.background = 'green';
 
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
@@ -108,6 +123,12 @@ function Note() {
     noteMarginBottom.addEventListener('mousedown', this.startNSResize.bind(this));
     noteMarginLeft.addEventListener('mousedown', this.startLEWResize.bind(this));
     noteResizeEl.addEventListener('mousedown', this.startNWSEResize.bind(this));
+    noteSFCYellowEl.addEventListener('click', this.setfColor.bind(this,'yellow'));
+    noteSFCOrangeEl.addEventListener('click', this.setfColor.bind(this,'orange'));
+    noteSFCRedEl.addEventListener('click', this.setfColor.bind(this,'red'));
+    noteSFCPurpleEl.addEventListener('click', this.setfColor.bind(this,'purple'));
+    noteSFCBlueEl.addEventListener('click', this.setfColor.bind(this,'blue'));
+    noteSFCGreenEl.addEventListener('click', this.setfColor.bind(this,'green'));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
     window.addEventListener('unload', Note.saveNotes());
 
@@ -122,6 +143,13 @@ function Note() {
     noteEl.appendChild(noteMarginBottom);
     noteEl.appendChild(noteMarginLeft);
     noteEl.appendChild(noteResizeEl);
+    noteEl.appendChild(noteSetFColorEl);
+    noteSetFColorEl.appendChild(noteSFCYellowEl);
+    noteSetFColorEl.appendChild(noteSFCOrangeEl);
+    noteSetFColorEl.appendChild(noteSFCRedEl);
+    noteSetFColorEl.appendChild(noteSFCPurpleEl);
+    noteSetFColorEl.appendChild(noteSFCBlueEl);
+    noteSetFColorEl.appendChild(noteSFCGreenEl);
   }
   
   //handles moving the note, initiated with startMove
