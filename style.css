@@ -14,9 +14,22 @@
 body {
    background: url("assets/pin-board-67130_1280.jpg") no-repeat center center fixed;
    background-size: 100% 100%;
+
    /*background-repeat: no-repeat;*/
 }
+div {
+  font-family: 'Cabin Sketch', cursive;
+  color: black;
+  font-size: 175px;
+  font-weight:595;
+  height: 50px;
+  width: 120px;
+  position: fixed;
+  top: 30%;
+  left: 35%;
+}
 
+}
 .note:hover .noteTrash {
   display: inline;
 }
