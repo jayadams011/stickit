@@ -53,6 +53,7 @@ function Note() {
     var noteEl = document.createElement('div');
     var noteFilterEl = document.createElement('div');
     var noteTitleEl = document.createElement('input');
+    var noteTrashEl = document.createElement('div');
     var noteInputEl = document.createElement('textarea');
     var noteMarginTop = document.createElement('div');
     var noteMarginRight = document.createElement('div');
@@ -77,6 +78,9 @@ function Note() {
     noteFilterEl.style.background = this.filterColor;
     noteTitleEl.setAttribute('class', 'noteTitle');
     noteTitleEl.setAttribute('type', 'text');
+    noteTitleEl.style.borderColor = this.filterColor;
+    noteTrashEl.setAttribute('class', 'noteTrash');
+    noteTrashEl.textContent = 'x';
     noteInputEl.setAttribute('class' ,'noteInput');
     noteMarginTop.setAttribute('class', 'noteMarginTop');
     noteMarginRight.setAttribute('class', 'noteMarginRight');
@@ -87,6 +91,7 @@ function Note() {
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
     noteTitleEl.addEventListener('change', this.save.bind(this));
+    noteTrashEl.addEventListener('click', this.unrender.bind(this));
     noteInputEl.addEventListener('change', this.save.bind(this));
     noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
     noteMarginRight.addEventListener('mousedown', this.startREWResize.bind(this));
@@ -99,6 +104,7 @@ function Note() {
     bodyEl.appendChild(noteEl);
     noteEl.appendChild(noteFilterEl);
     noteEl.appendChild(noteTitleEl);
+    noteEl.appendChild(noteTrashEl);
     noteEl.appendChild(noteInputEl);
     noteEl.appendChild(noteMarginTop);
     noteEl.appendChild(noteMarginRight);
@@ -163,7 +169,7 @@ function Note() {
   //save contents of note before unrendering
   this.save = function() {
     this.title = document.getElementById(this.id).childNodes[1].value;
-    this.contents = document.getElementById(this.id).childNodes[2].value;
+    this.contents = document.getElementById(this.id).childNodes[3].value;
     Note.saveNotes();
   }
 

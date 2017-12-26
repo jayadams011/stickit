@@ -11,6 +11,15 @@
   border: 1px solid #888;
 }
 
+.note:hover .noteTrash {
+  display: inline;
+}
+
+.note:hover .noteTitle {
+  border-bottom-style: groove;
+  border-bottom-width: 1px;
+}
+
 .noteFilter {
   position: relative;
   top: 0px;
@@ -70,8 +79,23 @@
   top: 5px;
   left: 5px;
   height: 20px;
-  font-weight: bold;
+  width: 120px;
+  font-family: 'Architects Daughter';
+  font-size: 20px;
 }
+
+.noteTrash {
+  position: absolute;
+  display: none;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  right: 0px;
+  color: #a88;
+  font-family: courier;
+  cursor: pointer;
+}
+
 
 .noteInput {
   position: absolute;
@@ -80,6 +104,8 @@
   top: 30px;
   left: 5px;
   color: #000;
+  font-family: 'Architects Daughter';
+  font-size: 16px;
 }
 
 .noteResize {
