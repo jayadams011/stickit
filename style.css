@@ -17,7 +17,8 @@ body {
 
    /*background-repeat: no-repeat;*/
 }
-div {
+
+body>div:first-child {
   font-family: 'Cabin Sketch', cursive;
   color: black;
   font-size: 175px;
@@ -29,7 +30,6 @@ div {
   left: 35%;
 }
 
-}
 .note:hover .noteTrash {
   display: inline;
 }
