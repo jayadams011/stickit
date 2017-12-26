@@ -38,7 +38,7 @@ function Note() {
   this.filterColor = '#ff0';
 
   //Number of degrees rotated (from -maxTilt to +maxTilt)
-  var maxTilt = 10;
+  var maxTilt = 5;
   this.tilt = (Math.random() - .5) * 2 * maxTilt;
   
   //indicates whether the note is invisible
