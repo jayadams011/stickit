@@ -88,12 +88,12 @@
   display: none;
   width: 20px;
   height: 20px;
+  overflow: hidden;
   top: 5px;
   right: 0px;
   color: #a88;
   font-family: courier;
   cursor: pointer;
-  transition: 1s;
 }
 
 
