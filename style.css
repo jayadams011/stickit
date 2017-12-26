@@ -9,11 +9,6 @@
   background: radial-gradient(#fff, #eee, #ddd);
   box-shadow: 2px 2px 3px #888;
   border: 1px solid #888;
-  transition: all 1s ease;
-}
-
-.note:hover {
-  transform: rotate(0deg) !important;
 }
 
 .note:hover .noteTrash {
