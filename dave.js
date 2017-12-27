@@ -8,6 +8,7 @@ document.onmousemove = function(e) {
   mouseY = e.clientY;
 }
 
+//holder array and file system functions
 Note.notes = [];
 Note.saveNotes = function() { localStorage.notes = JSON.stringify(Note.notes); }
 Note.loadNotes = function() {
@@ -16,6 +17,12 @@ Note.loadNotes = function() {
     Note.notes[i] = Object.assign(new Note(), objArr[i]);
     if (!Note.notes[i].trashed) Note.notes[i].render();
   }
+}
+
+//actions performed on unload
+Note.onExit = function() {
+  for (var i = 0; i < Note.notes.length; i++) Note.notes[i].sfx = 'loadnote';
+  Note.saveNotes();
 }
 
 function Note() {
@@ -38,11 +45,14 @@ function Note() {
   this.filterColor = '#ff0';
 
   //Number of degrees rotated (from -maxTilt to +maxTilt)
-  var maxTilt = 10;
+  var maxTilt = 5;
   this.tilt = (Math.random() - .5) * 2 * maxTilt;
   
   //indicates whether the note is invisible
   this.trashed = false;
+
+  //if age is 'newnote', an animation will occur on render - then age will be set to an empty string.
+  this.sfx = 'newnote';
 
   Note.notes.push(this);
 
@@ -67,6 +77,14 @@ function Note() {
     var noteMarginBottom = document.createElement('div');
     var noteMarginLeft = document.createElement('div');
     var noteResizeEl = document.createElement('div');
+    //color picker
+    var noteSetFColorEl = document.createElement('div');
+    var noteSFCYellowEl = document.createElement('div');
+    var noteSFCOrangeEl = document.createElement('div');
+    var noteSFCRedEl = document.createElement('div');
+    var noteSFCPurpleEl = document.createElement('div');
+    var noteSFCBlueEl = document.createElement('div');
+    var noteSFCGreenEl = document.createElement('div');
 
     //set position and size for note
     noteEl.style.top = this.coords[1] + 'px';
@@ -79,7 +97,7 @@ function Note() {
     noteInputEl.textContent = this.contents;
 
     //set attributes, esp. classes to be used by styles and scripts
-    noteEl.setAttribute('class', 'note');
+    noteEl.setAttribute('class', 'note ' + this.sfx);
     noteEl.setAttribute('id', this.id);
     noteEl.style.transform = 'rotate(' + this.tilt + 'deg)';
     noteFilterEl.setAttribute('class', 'noteFilter');
@@ -95,6 +113,13 @@ function Note() {
     noteMarginBottom.setAttribute('class', 'noteMarginBottom');
     noteMarginLeft.setAttribute('class', 'noteMarginLeft');
     noteResizeEl.setAttribute('class', 'noteResize');
+    noteSetFColorEl.setAttribute('class', 'noteSetFColor');
+    noteSFCYellowEl.style.background = 'yellow';
+    noteSFCOrangeEl.style.background = 'orange';
+    noteSFCRedEl.style.background = 'red';
+    noteSFCPurpleEl.style.background = 'purple';
+    noteSFCBlueEl.style.background = 'blue';
+    noteSFCGreenEl.style.background = 'green';
 
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
@@ -108,8 +133,14 @@ function Note() {
     noteMarginBottom.addEventListener('mousedown', this.startNSResize.bind(this));
     noteMarginLeft.addEventListener('mousedown', this.startLEWResize.bind(this));
     noteResizeEl.addEventListener('mousedown', this.startNWSEResize.bind(this));
+    noteSFCYellowEl.addEventListener('click', this.setfColor.bind(this,'yellow'));
+    noteSFCOrangeEl.addEventListener('click', this.setfColor.bind(this,'orange'));
+    noteSFCRedEl.addEventListener('click', this.setfColor.bind(this,'red'));
+    noteSFCPurpleEl.addEventListener('click', this.setfColor.bind(this,'purple'));
+    noteSFCBlueEl.addEventListener('click', this.setfColor.bind(this,'blue'));
+    noteSFCGreenEl.addEventListener('click', this.setfColor.bind(this,'green'));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
-    window.addEventListener('unload', Note.saveNotes());
+    window.addEventListener('unload', Note.onExit);
 
     //build note element and attach to DOM
     bodyEl.appendChild(noteEl);
@@ -122,6 +153,15 @@ function Note() {
     noteEl.appendChild(noteMarginBottom);
     noteEl.appendChild(noteMarginLeft);
     noteEl.appendChild(noteResizeEl);
+    noteEl.appendChild(noteSetFColorEl);
+    noteSetFColorEl.appendChild(noteSFCYellowEl);
+    noteSetFColorEl.appendChild(noteSFCOrangeEl);
+    noteSetFColorEl.appendChild(noteSFCRedEl);
+    noteSetFColorEl.appendChild(noteSFCPurpleEl);
+    noteSetFColorEl.appendChild(noteSFCBlueEl);
+    noteSetFColorEl.appendChild(noteSFCGreenEl);
+  
+    if (this.sfx) this.sfx = 0;
   }
   
   //handles moving the note, initiated with startMove
@@ -193,6 +233,7 @@ function Note() {
   this.trash = function() {
     this.trashed = true;
     this.unrender();
+    this.age = 'newnote';
     Note.saveNotes();
   }
 }
