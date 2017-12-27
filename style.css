@@ -1,7 +1,7 @@
 /*
 * {
  outline: 1px dotted orange;
-} 
+}
 */
 
 .note {
@@ -116,3 +116,13 @@
   cursor: nwse-resize;
 }
 
+
+
+/*style "newNoteButton" button*/
+
+#newNoteButton {
+  background-color: black;
+  color: brown;
+  font-style: ;
+  width: 10%;
+}
