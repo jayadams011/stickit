@@ -186,3 +186,43 @@ body>div:first-child {
   bottom: 0px;
   cursor: nwse-resize;
 }
+
+/*style "newNoteButton" button*/
+
+#newNoteButton {
+  background-color: tan;
+  color: black;
+  font-style: bold;
+  text-align: center;
+  font-weight: 900;
+  font-family:'Cabin Sketch';
+  width: 5%;
+  hieght: 10%;
+  position: fixed;
+  top: 85%;
+  left: 7%;
+  border-bottom: double;
+  opacity: 0.9;
+  filter: alpha(opacity=10);
+  border-radius: 5px;
+  margin: auto;
+
+  /*add shadow effect*/
+  box-shadow: 2px 2px gray;
+
+
+  /*add bounce effect on click */
+}
+
+  /*change in colo-intensity with hover, change bounce or press effect on click */
+
+
+/* #newNoteButton {background-color: #3e8e41}
+
+#newNoteButton {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+
+
+} */
