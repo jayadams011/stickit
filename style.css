@@ -9,6 +9,7 @@
   background: radial-gradient(#fff, #eee, #ddd);
   box-shadow: 2px 2px 3px #000;
   border: 1px solid #000;
+  -webkit-backface-visibility: hidden;
 }
 
 .newnote {
@@ -139,7 +140,7 @@ body>div:first-child {
   top: 5px;
   right: 5px;
   text-align: right;
-  color: #a88;
+  color: #622;
   font-family: courier;
   cursor: pointer;
 }
