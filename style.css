@@ -194,20 +194,21 @@ body>div:first-child {
 /*style "newNoteButton" button*/
 
 #newNoteButton {
-  background-color: orange;
-  background-image: url("paper.gif");
+  background-color: tan;
   color: black;
   font-style: bold;
+  font-weight: 700;
   font-family:'Cabin Sketch';
-  width: 3%;
+  width: 5%;
   hieght: 10%;
   position: fixed;
   top: 85%;
-  left: 6%;
-border-bottom: double;
-opacity: 0.5;
-    filter: alpha(opacity=10);
+  left: 7%;
+  border-bottom: double;
+  opacity: 0.5;
+  filter: alpha(opacity=10);
+  border-radius: 13px;
+  margin: auto;
 
-
-
+  /*change in colo-intensity with hover, change... in a bounce with a click */
 }
