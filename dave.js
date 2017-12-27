@@ -8,6 +8,9 @@ document.onmousemove = function(e) {
   mouseY = e.clientY;
 };
 
+//var to hold note curl array
+var arrCurlNames = ['curl1','curl2','curl3','curl4','curl5','curl6','curl7','curl8'];
+
 //holder array and file system functions
 Note.notes = [];
 Note.saveNotes = function() { localStorage.notes = JSON.stringify(Note.notes);};
@@ -18,6 +21,8 @@ Note.loadNotes = function() {
     if (!Note.notes[i].trashed) Note.notes[i].render();
   }
 };
+
+
 
 //actions performed on unload
 Note.onExit = function() {
@@ -54,6 +59,9 @@ function Note() {
   //if age is 'newnote', an animation will occur on render - then age will be set to an empty string.
   this.sfx = 'newnote';
 
+  //note shadow curl
+  this.curl = arrCurl [Math.round(Math.random()) + arrCurlNames.length];
+
   Note.notes.push(this);
 
   this.unrender = function() {
@@ -64,6 +72,7 @@ function Note() {
   this.render = function() {
     //unrender if already on screen
     if (document.getElementById(this.id)) this.unrender();
+
 
     //create Elements
     var bodyEl = document.querySelector('body');
@@ -120,6 +129,7 @@ function Note() {
     noteSFCPurpleEl.style.background = 'purple';
     noteSFCBlueEl.style.background = 'blue';
     noteSFCGreenEl.style.background = 'green';
+    noteEl.setAttribute('class',arrCurlNames());
 
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));

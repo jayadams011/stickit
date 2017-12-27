@@ -186,3 +186,33 @@ body>div:first-child {
   bottom: 0px;
   cursor: nwse-resize;
 }
+
+.curl1 {
+  box-shadow: 2px 2px 3px #000;
+}
+
+.curl2 {
+  .curl2
+{
+  position: relative;
+}
+.curl2:before, .curl2:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  box-shadow: 0 15px 10px #777;
+  transform: rotate(-3deg);
+}
+.curl2:after
+{
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
