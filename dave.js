@@ -8,6 +8,7 @@ document.onmousemove = function(e) {
   mouseY = e.clientY;
 }
 
+//holder array and file system functions
 Note.notes = [];
 Note.saveNotes = function() { localStorage.notes = JSON.stringify(Note.notes); }
 Note.loadNotes = function() {
@@ -16,6 +17,12 @@ Note.loadNotes = function() {
     Note.notes[i] = Object.assign(new Note(), objArr[i]);
     if (!Note.notes[i].trashed) Note.notes[i].render();
   }
+}
+
+//actions performed on unload
+Note.onExit = function() {
+  for (var i = 0; i < Note.notes.length; i++) Note.notes[i].sfx = 'newnote';
+  Note.saveNotes();
 }
 
 function Note() {
@@ -43,6 +50,9 @@ function Note() {
   
   //indicates whether the note is invisible
   this.trashed = false;
+
+  //if age is 'newnote', an animation will occur on render - then age will be set to an empty string.
+  this.sfx = 'newnote';
 
   Note.notes.push(this);
 
@@ -87,7 +97,7 @@ function Note() {
     noteInputEl.textContent = this.contents;
 
     //set attributes, esp. classes to be used by styles and scripts
-    noteEl.setAttribute('class', 'note');
+    noteEl.setAttribute('class', 'note ' + this.sfx);
     noteEl.setAttribute('id', this.id);
     noteEl.style.transform = 'rotate(' + this.tilt + 'deg)';
     noteFilterEl.setAttribute('class', 'noteFilter');
@@ -130,7 +140,7 @@ function Note() {
     noteSFCBlueEl.addEventListener('click', this.setfColor.bind(this,'blue'));
     noteSFCGreenEl.addEventListener('click', this.setfColor.bind(this,'green'));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
-    window.addEventListener('unload', Note.saveNotes());
+    window.addEventListener('unload', Note.onExit);
 
     //build note element and attach to DOM
     bodyEl.appendChild(noteEl);
@@ -150,6 +160,8 @@ function Note() {
     noteSetFColorEl.appendChild(noteSFCPurpleEl);
     noteSetFColorEl.appendChild(noteSFCBlueEl);
     noteSetFColorEl.appendChild(noteSFCGreenEl);
+  
+    if (this.sfx) this.sfx = 0;
   }
   
   //handles moving the note, initiated with startMove
@@ -221,6 +233,7 @@ function Note() {
   this.trash = function() {
     this.trashed = true;
     this.unrender();
+    this.age = 'newnote';
     Note.saveNotes();
   }
 }
