@@ -6,24 +6,24 @@ var mouseY = 0;
 document.onmousemove = function(e) {
   mouseX = e.clientX;
   mouseY = e.clientY;
-}
+};
 
 //holder array and file system functions
 Note.notes = [];
-Note.saveNotes = function() { localStorage.notes = JSON.stringify(Note.notes); }
+Note.saveNotes = function() { localStorage.notes = JSON.stringify(Note.notes);};
 Note.loadNotes = function() {
   var objArr = JSON.parse(localStorage.notes);
   for (var i = 0; i < objArr.length; i++) {
     Note.notes[i] = Object.assign(new Note(), objArr[i]);
     if (!Note.notes[i].trashed) Note.notes[i].render();
   }
-}
+};
 
 //actions performed on unload
 Note.onExit = function() {
   for (var i = 0; i < Note.notes.length; i++) Note.notes[i].sfx = 'loadnote';
   Note.saveNotes();
-}
+};
 
 function Note() {
 
@@ -33,7 +33,7 @@ function Note() {
   //dimensions of the note in pixels
   this.height = 250;
   this.width = 250;
- 
+
   //the text contents of the note
   this.title = 'My Note';
   this.contents = '';
@@ -47,7 +47,7 @@ function Note() {
   //Number of degrees rotated (from -maxTilt to +maxTilt)
   var maxTilt = 5;
   this.tilt = (Math.random() - .5) * 2 * maxTilt;
-  
+
   //indicates whether the note is invisible
   this.trashed = false;
 
@@ -59,8 +59,8 @@ function Note() {
   this.unrender = function() {
     var noteEl = document.getElementById(this.id);
     noteEl.parentNode.removeChild(noteEl);
-  }
-  
+  };
+
   this.render = function() {
     //unrender if already on screen
     if (document.getElementById(this.id)) this.unrender();
@@ -160,16 +160,16 @@ function Note() {
     noteSetFColorEl.appendChild(noteSFCPurpleEl);
     noteSetFColorEl.appendChild(noteSFCBlueEl);
     noteSetFColorEl.appendChild(noteSFCGreenEl);
-  
+
     if (this.sfx) this.sfx = 0;
-  }
-  
+  };
+
   //handles moving the note, initiated with startMove
   this.move = function(offsetX, offsetY) {
     this.coords = [mouseX - offsetX, mouseY - offsetY];
     this.render();
-  }
-  
+  };
+
   //handle resizing the note
   var minWidth = 150;
   var minHeight = 150;
@@ -179,17 +179,17 @@ function Note() {
     if (this.width < minWidth) this.width = minWidth;
     if (this.height < minHeight) this.height = minHeight;
     this.render();
-  }
+  };
   this.nsResize = function() {
     this.height = mouseY - this.coords[1];
     if (this.height < minHeight) this.height = minHeight;
     this.render();
-  }
+  };
   this.rewResize = function() {
     this.width = mouseX - this.coords[0];
     if (this.width < minWidth) this.width = minWidth;
     this.render();
-  }
+  };
   this.lewResize = function() {
     var oldX = this.coords[0];
     var maxX = this.coords[0] + this.width - minWidth;
@@ -197,45 +197,45 @@ function Note() {
     if (this.coords[0] > maxX) this.coords[0] = maxX;
     this.width -= this.coords[0] - oldX;
     this.render();
-  }
+  };
 
   //intervals for move and resize functions
   var interval = 0;
-  this.startMove = function(e) { 
+  this.startMove = function(e) {
     e.preventDefault();
     var offsetX = mouseX - this.coords[0];
     var offsetY = mouseY - this.coords[1];
     interval = setInterval(this.move.bind(this, offsetX, offsetY), 10);
-  }
-  this.startNWSEResize = function(e) { e.preventDefault(); interval = setInterval(this.nwseResize.bind(this), 10); }
-  this.startNSResize = function(e) { e.preventDefault(); interval = setInterval(this.nsResize.bind(this), 10); }
-  this.startLEWResize = function(e) { e.preventDefault(); interval = setInterval(this.lewResize.bind(this), 10); }
-  this.startREWResize = function(e) { e.preventDefault(); interval = setInterval(this.rewResize.bind(this), 10); }
+  };
+  this.startNWSEResize = function(e) { e.preventDefault(); interval = setInterval(this.nwseResize.bind(this), 10); };
+  this.startNSResize = function(e) { e.preventDefault(); interval = setInterval(this.nsResize.bind(this), 10); };
+  this.startLEWResize = function(e) { e.preventDefault(); interval = setInterval(this.lewResize.bind(this), 10); };
+  this.startREWResize = function(e) { e.preventDefault(); interval = setInterval(this.rewResize.bind(this), 10); };
   this.stopInterval = function(e) {
     e.preventDefault();
     Note.saveNotes();
     clearInterval(interval);
-  }
+  };
 
   //save contents of note before unrendering
   this.save = function() {
     this.title = document.getElementById(this.id).childNodes[1].value;
     this.contents = document.getElementById(this.id).childNodes[3].value;
     Note.saveNotes();
-  }
+  };
 
   //set color of note
   this.setfColor = function(color) {
     this.filterColor = color;
     this.render();
-  }
+  };
 
   this.trash = function() {
     this.trashed = true;
     this.unrender();
     this.age = 'newnote';
     Note.saveNotes();
-  }
+  };
 }
 
 function init() {
