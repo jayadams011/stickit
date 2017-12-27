@@ -9,6 +9,7 @@
   background: radial-gradient(#fff, #eee, #ddd);
   box-shadow: 2px 2px 3px #000;
   border: 1px solid #000;
+  -webkit-backface-visibility: hidden;
 }
 
 .newnote {
