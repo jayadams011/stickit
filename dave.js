@@ -8,8 +8,8 @@ document.onmousemove = function(e) {
   mouseY = e.clientY;
 };
 
-//var to hold note curl array
-var arrCurlNames = ['curl1','curl2','curl3','curl4','curl5','curl6','curl7','curl8'];
+//var to hold note curl effect array
+var arrCurlNames = ['curl1','curl2','curl3'];
 
 //holder array and file system functions
 Note.notes = [];
@@ -59,7 +59,7 @@ function Note() {
   //if age is 'newnote', an animation will occur on render - then age will be set to an empty string.
   this.sfx = 'newnote';
 
-  //note shadow curl
+  //note shadow curl randonizer
   this.curl = arrCurl [Math.round(Math.random()) + arrCurlNames.length];
 
   Note.notes.push(this);
