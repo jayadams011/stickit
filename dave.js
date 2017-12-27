@@ -9,7 +9,7 @@ document.onmousemove = function(e) {
 };
 
 //var to hold note curl effect array
-var arrCurlNames = ['curl1','curl2','curl3'];
+Note.arrCurlNames = ['curl1','curl2','curl3'];
 
 //holder array and file system functions
 Note.notes = [];
@@ -60,7 +60,7 @@ function Note() {
   this.sfx = 'newnote';
 
   //note shadow curl randonizer
-  this.curl = arrCurl [Math.round(Math.random()) + arrCurlNames.length];
+  this.curl = Note.arrCurlNames[Math.round(Math.random()) * Note.arrCurlNames.length];
 
   Note.notes.push(this);
 
@@ -106,7 +106,7 @@ function Note() {
     noteInputEl.textContent = this.contents;
 
     //set attributes, esp. classes to be used by styles and scripts
-    noteEl.setAttribute('class', 'note ' + this.sfx);
+    noteEl.setAttribute('class', 'note ' + this.sfx + ' ' + this.curl);
     noteEl.setAttribute('id', this.id);
     noteEl.style.transform = 'rotate(' + this.tilt + 'deg)';
     noteFilterEl.setAttribute('class', 'noteFilter');
@@ -129,7 +129,7 @@ function Note() {
     noteSFCPurpleEl.style.background = 'purple';
     noteSFCBlueEl.style.background = 'blue';
     noteSFCGreenEl.style.background = 'green';
-    noteEl.setAttribute('class',arrCurlNames());
+
 
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
