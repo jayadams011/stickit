@@ -12,26 +12,28 @@
 }
 
 .newnote {
+  animation: waggle 350ms;
+  animation-timing-function: linear;
+}
+
+.loadnote {
   animation: pop 350ms;
   animation-timing-function: linear;
 }
 
+@keyframes waggle {
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-10deg); }
+  75% { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+}
+
 @keyframes pop {
-  0% {
-    transform: scale(.1);
-  }
-  25% {
-    transform: scale(.33);
-  }
-  50% {
-    transform: scale(.8);
-  }
-  75% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(.1); }
+  25% { transform: scale(.3); }
+  50% { transform: scale(.8); }
+  75% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 body {
