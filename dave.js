@@ -269,6 +269,7 @@ Note.prototype.clipify = function() {
   for (var i = 0; i < clipCount; i++) {
     for (var j = 0; j < clipCount; j++) {
       var clip = starterEl.cloneNode(true);
+      clip.classList.add('clip');
       clip.style.top = '0';
       clip.style.left = '0';
       clip.style.transform = 'rotate(0)';
@@ -282,8 +283,10 @@ Note.prototype.explode = function() {
   this.clipify();
   var noteEl = document.getElementById(this.id);
   for (var i = 0; i < noteEl.childNodes.length; i++) {
-    noteEl.childNodes[i].style.className += 'projectile';
+    noteEl.childNodes[i].style.top = (Math.random()-.5)*100 + 'px';
+    noteEl.childNodes[i].style.left = (Math.random()-.5)*100 + 'px';
   }
+
 }
 
 function konami() {
