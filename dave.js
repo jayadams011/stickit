@@ -109,6 +109,7 @@ function Note() {
     noteEl.setAttribute('class', 'note ' + this.sfx + ' ' + this.curl);
     noteEl.setAttribute('id', this.id);
     noteEl.style.transform = 'rotate(' + this.tilt + 'deg)';
+    noteEl.style.visibility = 'visible';
     noteFilterEl.setAttribute('class', 'noteFilter');
     noteFilterEl.style.background = this.filterColor;
     noteTitleEl.setAttribute('class', 'noteTitle');
@@ -171,7 +172,7 @@ function Note() {
     noteSetFColorEl.appendChild(noteSFCBlueEl);
     noteSetFColorEl.appendChild(noteSFCGreenEl);
 
-    if (this.sfx) this.sfx = 0;
+    if (this.sfx) this.sfx = '';
   };
 
   //handles moving the note, initiated with startMove
@@ -251,23 +252,23 @@ function Note() {
 
 Note.prototype.clipify = function(id) {
   //the number of rows and colums of clipped divs
-  var clipCount = 2;
+  var clipCount = 4;
   
   //each clip's width and height as a percentage of the whole note 
   var percentHW = 100 / clipCount;
   
   var noteEl = document.getElementById(id);
-  var starterEl = noteEl.cloneNode();
+  var starterEl = noteEl.cloneNode(true);
   noteEl.style.visibility = 'hidden';
   //build each clip by row and column
   for (var i = 0; i < clipCount; i++) {
     for (var j = 0; j < clipCount; j++) {
-      var clip = starterEl.cloneNode();
+      var clip = starterEl.cloneNode(true);
       clip.style.top = '0';
       clip.style.left = '0';
+      clip.style.className = 'note'
       clip.style.transform = 'rotate(0)';
       clip.style.clipPath = 'inset(' + percentHW*i + '% ' + (100-percentHW*(j+1)) + '% ' + (100-percentHW*(i+1)) + '% ' + percentHW*j + '%)';
-      clip.style.visibility = 'visible';
       noteEl.appendChild(clip);
     }
   }
