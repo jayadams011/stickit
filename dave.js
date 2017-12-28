@@ -229,7 +229,7 @@ function Note() {
     this.title = document.getElementById(this.id).childNodes[1].value;
     this.contents = document.getElementById(this.id).childNodes[3].value;
     Note.saveNotes();
-    if (this.contents === 'upupdowndownleftrightleftrightba') this.clipify();
+    if (this.contents === 'upupdowndownleftrightleftrightba') konami();
   };
 
   //set color of note
@@ -247,6 +247,11 @@ function Note() {
 }
 
 Note.prototype.clipify = function() {
+  //Remove any leftover sfx classes and get note element
+  this.unrender();
+  this.render();
+  var noteEl = document.getElementById(this.id);
+
   //the number of rows and colums of clipped divs
   var clipCount = 5;
   
@@ -255,7 +260,6 @@ Note.prototype.clipify = function() {
   
   
   //make a copy of noteEl that has no clips in it
-  var noteEl = document.getElementById(this.id);
   var starterEl = noteEl.cloneNode(true);
 
   //hide noteEl - only clips will be visible
@@ -265,6 +269,7 @@ Note.prototype.clipify = function() {
   for (var i = 0; i < clipCount; i++) {
     for (var j = 0; j < clipCount; j++) {
       var clip = starterEl.cloneNode(true);
+      clip.classList.add('clip');
       clip.style.top = '0';
       clip.style.left = '0';
       clip.style.transform = 'rotate(0)';
@@ -274,9 +279,17 @@ Note.prototype.clipify = function() {
   }
 }
 
-function konami() {
-  console.log('konami!');
+Note.prototype.explode = function() {
+  this.clipify();
+  var noteEl = document.getElementById(this.id);
+  for (var i = 0; i < noteEl.childNodes.length; i++) {
+    noteEl.childNodes[i].style.top = (Math.random()-.5)*100 + 'px';
+    noteEl.childNodes[i].style.left = (Math.random()-.5)*100 + 'px';
+  }
+
 }
+
+function konami() { for (var i = 0; i < Note.notes.length; i++) Note.notes[i].explode(); }
 
 function init() {
   if (localStorage.notes) Note.loadNotes();

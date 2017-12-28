@@ -12,6 +12,11 @@
   -webkit-backface-visibility: hidden;
 }
 
+.clip {
+  transition-delay: 1s;
+  transition: all 2s ease-out;
+}
+
 .newnote {
   animation: waggle 350ms;
   animation-timing-function: linear;
