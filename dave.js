@@ -249,27 +249,29 @@ function Note() {
   };
 }
 
-Note.prototype.clipify = function() {
+Note.prototype.clipify = function(id) {
   //the number of rows and colums of clipped divs
-  var clipCount = 5;
+  var clipCount = 2;
   
   //each clip's width and height as a percentage of the whole note 
   var percentHW = 100 / clipCount;
-
+  
+  var noteEl = document.getElementById(id);
   //build each clip by row and column
   for (var i = 0; i < clipCount; i++) {
     for (var j = 0; j < clipCount; j++) {
       var clip = document.createElement('div');
-      clip.innerHTML = this.innerHTML;
-      clip.style = 'clip: rect(' + percentHW*i + '% ' + 100-percentHW*(j+1) + '% ' + 100-percentHW*(i+1) + '% ' + percentHW*j + '%)';
-      noteEl.addChild(clip);
+      clip.innerHTML = noteEl.innerHTML;
+      clip.style.clipPath = 'inset(' + percentHW*i + '% ' + (100-percentHW*(j+1)) + '% ' + (100-percentHW*(i+1)) + '% ' + percentHW*j + '%)';
+      console.log(clip.style.clipPath);
+      noteEl.appendChild(clip);
     }
   }
 }
 
 
 function konami(id) {
-  console.log('konami!');
+  Note.note[0].clipify(id);
 }
 
 function init() {
