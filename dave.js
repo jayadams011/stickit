@@ -227,11 +227,12 @@ function Note() {
     clearInterval(interval);
   };
 
-  //save contents of note before unrendering
+  //save contents of note before unrendering... and check for konami
   this.save = function() {
     this.title = document.getElementById(this.id).childNodes[1].value;
     this.contents = document.getElementById(this.id).childNodes[3].value;
     Note.saveNotes();
+    if (this.contents === 'upupdowndownleftrightleftrightba') konami(this.id);
   };
 
   //set color of note
@@ -246,6 +247,10 @@ function Note() {
     this.age = 'newnote';
     Note.saveNotes();
   };
+}
+
+function konami(id) {
+  console.log('konami!');
 }
 
 function init() {
