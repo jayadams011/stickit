@@ -48,7 +48,7 @@ body>div:first-child {
   font-family: 'Cabin Sketch', cursive;
   color: #301600;
   font-size: 175px;
-  font-weight:595;
+  font-weight:599;
   height: 50px;
   width: 120px;
   position: fixed;
@@ -187,42 +187,46 @@ body>div:first-child {
   cursor: nwse-resize;
 }
 
-/*style "newNoteButton" button*/
-
-#newNoteButton {
-  background-color: tan;
-  color: black;
-  font-style: bold;
-  text-align: center;
-  font-weight: 900;
-  font-family:'Cabin Sketch';
-  width: 5%;
-  hieght: 10%;
-  position: fixed;
-  top: 85%;
-  left: 7%;
-  border-bottom: double;
-  opacity: 0.9;
-  filter: alpha(opacity=10);
-  border-radius: 5px;
-  margin: auto;
-
-  /*add shadow effect*/
-  box-shadow: 2px 2px gray;
-
-
-  /*add bounce effect on click */
+/*curl code mostly from paullund.co.uk*/
+.curl1 {
+  box-shadow: 2px 2px 3px #000;
 }
 
-  /*change in colo-intensity with hover, change bounce or press effect on click */
+.curl2
+{
+  position: relative;
+}
+.curl2:before
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  box-shadow: 0 15px 10px #777;
+  transform: rotate(-3deg);
+}
 
-
-/* #newNoteButton {background-color: #3e8e41}
-
-#newNoteButton {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-
-
-} */
+.curl3
+{
+  position: relative;
+}
+.curl3:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  right: 10px;
+  left: auto;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  box-shadow: 0 15px 10px #777;
+  transform: rotate(3deg);
+}
