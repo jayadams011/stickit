@@ -229,7 +229,7 @@ function Note() {
     this.title = document.getElementById(this.id).childNodes[1].value;
     this.contents = document.getElementById(this.id).childNodes[3].value;
     Note.saveNotes();
-    if (this.contents === 'upupdowndownleftrightleftrightba') this.clipify();
+    if (this.contents === 'upupdowndownleftrightleftrightba') this.explode();
   };
 
   //set color of note
@@ -275,6 +275,14 @@ Note.prototype.clipify = function() {
       clip.style.clipPath = 'inset(' + percentHW*i + '% ' + (100-percentHW*(j+1)) + '% ' + (100-percentHW*(i+1)) + '% ' + percentHW*j + '%)';
       noteEl.appendChild(clip);
     }
+  }
+}
+
+Note.prototype.explode = function() {
+  this.clipify();
+  var noteEl = document.getElementById(this.id);
+  for (var i = 0; i < noteEl.childNodes.length; i++) {
+    noteEl.childNodes[i].style.className += 'projectile';
   }
 }
 
