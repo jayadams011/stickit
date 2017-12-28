@@ -257,13 +257,17 @@ Note.prototype.clipify = function(id) {
   var percentHW = 100 / clipCount;
   
   var noteEl = document.getElementById(id);
+  var starterEl = noteEl.cloneNode();
+  noteEl.style.visibility = 'hidden';
   //build each clip by row and column
   for (var i = 0; i < clipCount; i++) {
     for (var j = 0; j < clipCount; j++) {
-      var clip = document.createElement('div');
-      clip.innerHTML = noteEl.innerHTML;
+      var clip = starterEl.cloneNode();
+      clip.style.top = '0';
+      clip.style.left = '0';
+      clip.style.transform = 'rotate(0)';
       clip.style.clipPath = 'inset(' + percentHW*i + '% ' + (100-percentHW*(j+1)) + '% ' + (100-percentHW*(i+1)) + '% ' + percentHW*j + '%)';
-      console.log(clip.style.clipPath);
+      clip.style.visibility = 'visible';
       noteEl.appendChild(clip);
     }
   }
