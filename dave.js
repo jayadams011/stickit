@@ -247,6 +247,11 @@ function Note() {
 }
 
 Note.prototype.clipify = function() {
+  //Remove any leftover sfx classes and get note element
+  this.unrender();
+  this.render();
+  var noteEl = document.getElementById(this.id);
+
   //the number of rows and colums of clipped divs
   var clipCount = 5;
   
@@ -255,7 +260,6 @@ Note.prototype.clipify = function() {
   
   
   //make a copy of noteEl that has no clips in it
-  var noteEl = document.getElementById(this.id);
   var starterEl = noteEl.cloneNode(true);
 
   //hide noteEl - only clips will be visible
