@@ -22,8 +22,6 @@ Note.loadNotes = function() {
   }
 };
 
-
-
 //actions performed on unload
 Note.onExit = function() {
   for (var i = 0; i < Note.notes.length; i++) Note.notes[i].sfx = 'loadnote';
@@ -73,7 +71,6 @@ function Note() {
     //unrender if already on screen
     if (document.getElementById(this.id)) this.unrender();
 
-
     //create Elements
     var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
@@ -109,6 +106,7 @@ function Note() {
     noteEl.setAttribute('class', 'note ' + this.sfx + ' ' + this.curl);
     noteEl.setAttribute('id', this.id);
     noteEl.style.transform = 'rotate(' + this.tilt + 'deg)';
+    noteEl.style.visibility = 'visible';
     noteFilterEl.setAttribute('class', 'noteFilter');
     noteFilterEl.style.background = this.filterColor;
     noteTitleEl.setAttribute('class', 'noteTitle');
@@ -129,7 +127,6 @@ function Note() {
     noteSFCPurpleEl.style.background = 'purple';
     noteSFCBlueEl.style.background = 'blue';
     noteSFCGreenEl.style.background = 'green';
-
 
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
@@ -171,7 +168,7 @@ function Note() {
     noteSetFColorEl.appendChild(noteSFCBlueEl);
     noteSetFColorEl.appendChild(noteSFCGreenEl);
 
-    if (this.sfx) this.sfx = 0;
+    if (this.sfx) this.sfx = '';
   };
 
   //handles moving the note, initiated with startMove
@@ -232,7 +229,7 @@ function Note() {
     this.title = document.getElementById(this.id).childNodes[1].value;
     this.contents = document.getElementById(this.id).childNodes[3].value;
     Note.saveNotes();
-    if (this.contents === 'upupdowndownleftrightleftrightba') konami(this.id);
+    if (this.contents === 'upupdowndownleftrightleftrightba') this.clipify();
   };
 
   //set color of note
@@ -249,7 +246,35 @@ function Note() {
   };
 }
 
-function konami(id) {
+Note.prototype.clipify = function() {
+  //the number of rows and colums of clipped divs
+  var clipCount = 5;
+  
+  //each clip's width and height as a percentage of the whole note 
+  var percentHW = 100 / clipCount;
+  
+  
+  //make a copy of noteEl that has no clips in it
+  var noteEl = document.getElementById(this.id);
+  var starterEl = noteEl.cloneNode(true);
+
+  //hide noteEl - only clips will be visible
+  noteEl.style.visibility = 'hidden';
+
+  //build each clip by row and column
+  for (var i = 0; i < clipCount; i++) {
+    for (var j = 0; j < clipCount; j++) {
+      var clip = starterEl.cloneNode(true);
+      clip.style.top = '0';
+      clip.style.left = '0';
+      clip.style.transform = 'rotate(0)';
+      clip.style.clipPath = 'inset(' + percentHW*i + '% ' + (100-percentHW*(j+1)) + '% ' + (100-percentHW*(i+1)) + '% ' + percentHW*j + '%)';
+      noteEl.appendChild(clip);
+    }
+  }
+}
+
+function konami() {
   console.log('konami!');
 }
 
