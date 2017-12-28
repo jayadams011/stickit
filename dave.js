@@ -229,7 +229,7 @@ function Note() {
     this.title = document.getElementById(this.id).childNodes[1].value;
     this.contents = document.getElementById(this.id).childNodes[3].value;
     Note.saveNotes();
-    if (this.contents === 'upupdowndownleftrightleftrightba') this.explode();
+    if (this.contents === 'upupdowndownleftrightleftrightba') konami();
   };
 
   //set color of note
@@ -289,9 +289,7 @@ Note.prototype.explode = function() {
 
 }
 
-function konami() {
-  console.log('konami!');
-}
+function konami() { for (var i = 0; i < Note.notes.length; i++) Note.notes[i].explode(); }
 
 function init() {
   if (localStorage.notes) Note.loadNotes();
