@@ -13,7 +13,6 @@
 }
 
 .clip {
-  /*transition: all .5s cubic-bezier(.59,1.02,.58,.86);*/
   transition: all .6s ease-out;
 }
 
@@ -26,12 +25,12 @@
 }
 
 .shake {
-  animation: shake 350ms linear infinite;
+  animation: shake 70ms linear infinite;
 }
 
 @keyframes shake {
-  25% { transform: translate(5px); }
-  75% { transform: translate(-5px); }
+  25% { transform: translate(2px); }
+  75% { transform: translate(-2px); }
 }
 
 @keyframes waggle {

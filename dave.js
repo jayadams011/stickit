@@ -295,15 +295,18 @@ Note.prototype.explode = function(clipCount, strength) {
 //when it presses the code, precious...
 function konami(id) {
 
-  var initiator = id.substring(4);
+  var initiator = parseInt(id.substring(4));
+  console.log(initiator);
 
-  Note.notes[initiator].clippify;
+  Note.notes[initiator].clipify(5);
   for (var i = 0; i < document.getElementById(id).childNodes.length; i++)
     document.getElementById(id).childNodes[i].classList.add('shake');
-//  Note.notes[initiator].explode(5,50);
 
+  setTimeout(function() {
+  Note.notes[initiator].explode(5,50);
   for (var i = 0; i < Note.notes.length; i++)
-    if (i != initiator) Note.notes[i].explode(5,50); 
+    if (i != initiator) Note.notes[i].explode(5,50);
+  },1000);
 }
 
 function init() {
