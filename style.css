@@ -237,7 +237,7 @@ body>div:first-child {
 /*curl code mostly from paullund.co.uk*/
 
 .curl1 {
-  webkit-box-shadow: 2px 2px 3px #000;
+  -webkit-box-shadow: 2px 2px 3px 2px #000;
 }
 
 .curl2
@@ -254,7 +254,7 @@ body>div:first-child {
   top: 80%;
   max-width:120px;
   background: #777;
-  webkit-box-shadow: 0 15px 10px #777;
+  -webkit-box-shadow: 0 15px 10px #777;
   transform: rotate(-3deg);
 }
 
@@ -273,6 +273,6 @@ body>div:first-child {
   top: 80%;
   max-width:120px;
   background: #777;
-  webkit-box-shadow: 0 15px 10px #777;
+  -webkit-box-shadow: 0 15px 10px #777;
   transform: rotate(3deg);
 }
