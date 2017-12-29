@@ -229,7 +229,7 @@ function Note() {
     this.title = document.getElementById(this.id).childNodes[1].value;
     this.contents = document.getElementById(this.id).childNodes[3].value;
     Note.saveNotes();
-    if (this.contents === 'upupdowndownleftrightleftrightba') konami();
+    if (this.contents === 'upupdowndownleftrightleftrightba') konami(this.id);
   };
 
   //set color of note
@@ -279,7 +279,7 @@ Note.prototype.clipify = function(clipCount) {
 //runs clipify on note, then throws each clip in a random direction. Higher clipCount will create more individual particles, higher
 //strength will create a larger explosion effect.
 //Recommended clipCount values: 3-5.
-//Recommended strength values: 5-10.
+//Recommended strength values: 50 seems pretty explodey.
 Note.prototype.explode = function(clipCount, strength) {
   this.clipify(clipCount);
 
@@ -293,9 +293,22 @@ Note.prototype.explode = function(clipCount, strength) {
 }
 
 //when it presses the code, precious...
-function konami() {
+function konami(id) {
+
+  // which note called konami
+  var initiator = parseInt(id.substring(4));
+
+  // start to shake the initiating note
+  Note.notes[initiator].clipify(5);
+  for (var i = 0; i < document.getElementById(id).childNodes.length; i++)
+    document.getElementById(id).childNodes[i].classList.add('shake');
+
+  //after initiator shakes, explode them all. Initiator is outside loop because it has already been clipified
+  setTimeout(function() {
+  Note.notes[initiator].explode(5,45);
   for (var i = 0; i < Note.notes.length; i++)
-    Note.notes[i].explode(5,8); 
+    if (i != initiator) Note.notes[i].explode(5,45);
+  },1000);
 }
 
 function init() {

@@ -13,18 +13,24 @@
 }
 
 .clip {
-  /*transition: all .5s cubic-bezier(.59,1.02,.58,.86);*/
   transition: all .6s ease-out;
 }
 
 .newnote {
-  animation: waggle 350ms;
-  animation-timing-function: linear;
+  animation: waggle 350ms linear;
 }
 
 .loadnote {
-  animation: pop 350ms;
-  animation-timing-function: linear;
+  animation: pop 350ms linear;
+}
+
+.shake {
+  animation: shake 70ms linear infinite;
+}
+
+@keyframes shake {
+  25% { transform: translate(2px); }
+  75% { transform: translate(-2px); }
 }
 
 @keyframes waggle {
