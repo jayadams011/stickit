@@ -229,7 +229,7 @@ function Note() {
     this.title = document.getElementById(this.id).childNodes[1].value;
     this.contents = document.getElementById(this.id).childNodes[3].value;
     Note.saveNotes();
-    if (this.contents === 'upupdowndownleftrightleftrightba') konami();
+    if (this.contents === 'upupdowndownleftrightleftrightba') konami(this.id);
   };
 
   //set color of note
@@ -293,9 +293,17 @@ Note.prototype.explode = function(clipCount, strength) {
 }
 
 //when it presses the code, precious...
-function konami() {
+function konami(id) {
+
+  var initiator = id.substring(4);
+
+  Note.notes[initiator].clippify;
+  for (var i = 0; i < document.getElementById(id).childNodes.length; i++)
+    document.getElementById(id).childNodes[i].classList.add('shake');
+//  Note.notes[initiator].explode(5,50);
+
   for (var i = 0; i < Note.notes.length; i++)
-    Note.notes[i].explode(5,50); 
+    if (i != initiator) Note.notes[i].explode(5,50); 
 }
 
 function init() {
