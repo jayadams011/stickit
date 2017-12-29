@@ -246,18 +246,15 @@ function Note() {
   };
 }
 
-Note.prototype.clipify = function() {
+//Displays note as a grid of divs ("clips"), where clipCount is the number of rows and columns of clips
+Note.prototype.clipify = function(clipCount) {
   //Remove any leftover sfx classes and get note element
   this.unrender();
   this.render();
   var noteEl = document.getElementById(this.id);
 
-  //the number of rows and colums of clipped divs
-  var clipCount = 5;
-  
   //each clip's width and height as a percentage of the whole note 
   var percentHW = 100 / clipCount;
-  
   
   //make a copy of noteEl that has no clips in it
   var starterEl = noteEl.cloneNode(true);
@@ -279,17 +276,27 @@ Note.prototype.clipify = function() {
   }
 }
 
-Note.prototype.explode = function() {
-  this.clipify();
-  var noteEl = document.getElementById(this.id);
-  for (var i = 0; i < noteEl.childNodes.length; i++) {
-    noteEl.childNodes[i].style.top = (Math.random()-.5)*100 + 'px';
-    noteEl.childNodes[i].style.left = (Math.random()-.5)*100 + 'px';
-  }
+//runs clipify on note, then throws each clip in a random direction. Higher clipCount will create more individual particles, higher
+//strength will create a larger explosion effect.
+//Recommended clipCount values: 3-5.
+//Recommended strength values: 5-10.
+Note.prototype.explode = function(clipCount, strength) {
+  this.clipify(clipCount);
 
+  var noteEl = document.getElementById(this.id);
+  requestAnimationFrame(function() {
+    for (var i = 0; i < noteEl.childNodes.length; i++) {
+      noteEl.childNodes[i].style.top = (Math.random()-.5)*100*strength + 'px';
+      noteEl.childNodes[i].style.left = (Math.random()-.5)*100*strength + 'px';
+    }
+  });
 }
 
-function konami() { for (var i = 0; i < Note.notes.length; i++) Note.notes[i].explode(); }
+//when it presses the code, precious...
+function konami() {
+  for (var i = 0; i < Note.notes.length; i++)
+    Note.notes[i].explode(5,8); 
+}
 
 function init() {
   if (localStorage.notes) Note.loadNotes();
