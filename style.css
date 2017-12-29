@@ -13,11 +13,8 @@
 }
 
 .clip {
-  top: 0px;
-  left: 0px;
-  transform: rotate(0);
-  transition-delay: 1s;
-  transition: all 2s ease-out;
+  /*transition: all .5s cubic-bezier(.59,1.02,.58,.86);*/
+  transition: all .6s ease-out;
 }
 
 .newnote {
