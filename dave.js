@@ -305,9 +305,9 @@ function konami(id) {
 
   //after initiator shakes, explode them all. Initiator is outside loop because it has already been clipified
   setTimeout(function() {
-  Note.notes[initiator].explode(5,50);
+  Note.notes[initiator].explode(5,45);
   for (var i = 0; i < Note.notes.length; i++)
-    if (i != initiator) Note.notes[i].explode(5,50);
+    if (i != initiator) Note.notes[i].explode(5,45);
   },1000);
 }
 
