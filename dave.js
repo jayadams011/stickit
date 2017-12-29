@@ -295,13 +295,15 @@ Note.prototype.explode = function(clipCount, strength) {
 //when it presses the code, precious...
 function konami(id) {
 
+  // which note called konami
   var initiator = parseInt(id.substring(4));
-  console.log(initiator);
 
+  // start to shake the initiating note
   Note.notes[initiator].clipify(5);
   for (var i = 0; i < document.getElementById(id).childNodes.length; i++)
     document.getElementById(id).childNodes[i].classList.add('shake');
 
+  //after initiator shakes, explode them all. Initiator is outside loop because it has already been clipified
   setTimeout(function() {
   Note.notes[initiator].explode(5,50);
   for (var i = 0; i < Note.notes.length; i++)
