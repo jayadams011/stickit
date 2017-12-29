@@ -270,7 +270,7 @@ Note.prototype.clipify = function(clipCount) {
       clip.style.top = '0';
       clip.style.left = '0';
       clip.style.transform = 'rotate(0)';
-      clip.style.clipPath = 'inset(' + percentHW*i + '% ' + (100-percentHW*(j+1)) + '% ' + (100-percentHW*(i+1)) + '% ' + percentHW*j + '%)';
+      clip.style.clipPath = 'inset(' + percentHW*i + '% ' + (99-percentHW*(j+1)) + '% ' + (99-percentHW*(i+1)) + '% ' + percentHW*j + '%)';
       noteEl.appendChild(clip);
     }
   }
