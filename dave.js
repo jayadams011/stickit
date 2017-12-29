@@ -253,9 +253,9 @@ Note.prototype.clipify = function(clipCount) {
   this.render();
   var noteEl = document.getElementById(this.id);
 
-  //each clip's width and height as a percentage of the whole note 
+  //each clip's width and height as a percentage of the whole note
   var percentHW = 100 / clipCount;
-  
+
   //make a copy of noteEl that has no clips in it
   var starterEl = noteEl.cloneNode(true);
 
@@ -270,11 +270,11 @@ Note.prototype.clipify = function(clipCount) {
       clip.style.top = '0';
       clip.style.left = '0';
       clip.style.transform = 'rotate(0)';
-      clip.style.clipPath = 'inset(' + percentHW*i + '% ' + (99-percentHW*(j+1)) + '% ' + (99-percentHW*(i+1)) + '% ' + percentHW*j + '%)';
+      clip.style.clipPath = 'inset(' + percentHW * i + '% ' + (99 - percentHW * (j + 1)) + '% ' + (99 - percentHW * (i + 1)) + '% ' + percentHW * j + '%)';
       noteEl.appendChild(clip);
     }
   }
-}
+};
 
 //runs clipify on note, then throws each clip in a random direction. Higher clipCount will create more individual particles, higher
 //strength will create a larger explosion effect.
