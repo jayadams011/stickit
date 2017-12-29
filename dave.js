@@ -58,7 +58,7 @@ function Note() {
   this.sfx = 'newnote';
 
   //note shadow curl randonizer
-  this.curl = Note.arrCurlNames[Math.round(Math.random()) * Note.arrCurlNames.length];
+  this.curl = Note.arrCurlNames[Math.floor(Math.random() * Note.arrCurlNames.length)];
 
   Note.notes.push(this);
 
