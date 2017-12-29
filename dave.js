@@ -279,7 +279,7 @@ Note.prototype.clipify = function(clipCount) {
 //runs clipify on note, then throws each clip in a random direction. Higher clipCount will create more individual particles, higher
 //strength will create a larger explosion effect.
 //Recommended clipCount values: 3-5.
-//Recommended strength values: 5-10.
+//Recommended strength values: 50 seems pretty explodey.
 Note.prototype.explode = function(clipCount, strength) {
   this.clipify(clipCount);
 
@@ -295,7 +295,7 @@ Note.prototype.explode = function(clipCount, strength) {
 //when it presses the code, precious...
 function konami() {
   for (var i = 0; i < Note.notes.length; i++)
-    Note.notes[i].explode(5,8); 
+    Note.notes[i].explode(5,50); 
 }
 
 function init() {
