@@ -22,8 +22,8 @@ someNote.sfx = someEffect;
 Each note displayed on screen is a Note object. The Note() constructor function offers no parameters.
 
 #### Note instance properties:
-###### coords
-Array.  Elements [x,y] where x and y represent the top-left corner's position relative to the viewport. *Default: [500,200]*
+###### coords - Array - *Default: [500,200]*.
+Elements [x,y] where x and y represent the top-left corner's position relative to the viewport. *Default: [500,200]*
 ###### height
 Number. The note's height in pixels *Default: 250*
 ###### width
