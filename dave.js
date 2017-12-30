@@ -241,7 +241,6 @@ function Note() {
   this.trash = function() {
     this.trashed = true;
     this.unrender();
-    this.age = 'newnote';
     Note.saveNotes();
   };
 }
