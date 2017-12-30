@@ -7,7 +7,7 @@
 .note {
   position: absolute;
   background: radial-gradient(#fff, #eee, #ddd);
-  box-shadow: 2px 2px 3px #000;
+  /*box-shadow: 2px 2px 3px #000;*/
   border: 1px solid #000;
   -webkit-backface-visibility: hidden;
 }
@@ -198,6 +198,69 @@ body>div:first-child {
   cursor: nwse-resize;
 }
 
+.curl1 {
+  -webkit-box-shadow: 2px 2px 3px 2px #000;
+}
+
+.curl{}
+
+  .box h3{
+	text-align:center;
+	position:relative;
+	top:80px;
+}
+.box {
+	width:70%;
+	height:200px;
+	background:#FFF;
+	margin:40px auto;
+}
+
+/*==================================================
+ * curl 2
+ * ===============================================*/
+.curl2{}
+
+.curl2:before, .curl2:after
+{
+  z-index: -5;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 5px;
+  width: 100%;
+  top: 92%;
+  max-width:240px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-5deg);
+}
+.effect2:after
+{
+  -webkit-transform: rotate(5deg);
+  right: 5px;
+  left: auto;
+}
+
+.curl3{}
+
+.curl3:after
+{
+  z-index: -1;
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+  left: auto;
+  width: 50%;
+  top: 80%;
+  max-width:255px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -webkit-ransform: rotate(3deg);
+}
+
+
 #newNoteButton {
   background-color: tan;
   color: black;
@@ -235,44 +298,3 @@ body>div:first-child {
    }
 
 /*curl code mostly from paullund.co.uk*/
-
-.curl1 {
-  -webkit-box-shadow: 2px 2px 3px 2px #000;
-}
-
-.curl2
-{
-  position: relative;
-}
-.curl2:before
-{
-  z-index: -1;
-  position: absolute;
-  bottom: 15px;
-  left: 10px;
-  width: 50%;
-  top: 80%;
-  max-width:120px;
-  background: #777;
-  -webkit-box-shadow: 0 15px 10px #777;
-  transform: rotate(-3deg);
-}
-
-.curl3
-{
-  position: relative;
-}
-.curl3:after
-{
-  z-index: -1;
-  position: absolute;
-  bottom: 15px;
-  right: 10px;
-  left: auto;
-  width: 50%;
-  top: 80%;
-  max-width:120px;
-  background: #777;
-  -webkit-box-shadow: 0 15px 10px #777;
-  transform: rotate(3deg);
-}
