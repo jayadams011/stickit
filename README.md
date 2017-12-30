@@ -104,6 +104,7 @@ Called by *click* events on one of a note's DOM elements: the trash element in t
 
 ## Contribute
 Issue tracker: <https://www.github.com/dsnowb/stickit/issues>
+
 Source: <https://www.github.com/dsnowb/stickit>
 
 ## Support
