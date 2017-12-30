@@ -9,20 +9,19 @@ someNote.sfx = someEffect;
 ```
 
 ## Features
-*Practically unlimited sticky note creation
-*Movement, resizing, and recoloring of sticky notes
-*A title and content section per note
-*Interaction-free persistence through local storage
+- Practically unlimited sticky note creation
+- Movement, resizing, and recoloring of sticky notes
+- A title and content section per note
+- Interaction-free persistence through local storage
 
 ## Installation
 1. Download the source files from StickIt's repository: <https://www.github.com/dsnowb/stickit>
 2. Open the index.html file in your browser of choice
 
 ## "API" Usage
-
 Each note displayed on screen is a Note object. The Note() constructor function offers no parameters.
 
-####Note instance properties:
+#### Note instance properties:
 ###### coords
 An array with elements [x,y] where x and y represent the top-left corner's position relative to the viewport. *Default: [500,200]*
 ###### height
