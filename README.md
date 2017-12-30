@@ -9,13 +9,10 @@ someNote.sfx = someEffect;
 ```
 
 ## Features
--Practically unlimited sticky note creation
-
--Movement, resizing, and recoloring of sticky notes
-
--A title and content section per note
-
--Interaction-free persistence through local storage
+*Practically unlimited sticky note creation
+*Movement, resizing, and recoloring of sticky notes
+*A title and content section per note
+*Interaction-free persistence through local storage
 
 ## Installation
 1. Download the source files from StickIt's repository: <https://www.github.com/dsnowb/stickit>
