@@ -28,9 +28,9 @@ Elements [x,y] where x and y represent the top-left corner's position relative t
 The note's height in pixels.
 ###### width - *Number - Default: 250*
 The note's width in pixels.
-###### title - *String - Default: 'My Note'
+###### title - *String - Default: 'My Note'*
 The first of two content sections. Contains slightly enlarged "title" text. 12 character limit.
-###### contents - *String - Default: empty string
+###### contents - *String - Default: empty string*
 The second content section. Contains the "body" of the note text.
 ###### id - *String - Default: 'note'+Note.notes.length*
 A unique identifier given to the top level DOM node of the note as its id property. It is of the format 'note'+*num* where *num* is the instance's position in the array of all notes that currently exist (*Note.notes*).
