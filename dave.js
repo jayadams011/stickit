@@ -147,6 +147,7 @@ function Note() {
     noteSFCBlueEl.addEventListener('click', this.setfColor.bind(this,'blue'));
     noteSFCGreenEl.addEventListener('click', this.setfColor.bind(this,'green'));
     window.addEventListener('mouseup', this.stopInterval.bind(this));
+    window.addEventListener('contextmenu', this.stopInterval.bind(this));
     window.addEventListener('unload', Note.onExit);
 
     //build note element and attach to DOM
@@ -219,7 +220,7 @@ function Note() {
   this.startLEWResize = function(e) { e.preventDefault(); interval = setInterval(this.lewResize.bind(this), 10); };
   this.startREWResize = function(e) { e.preventDefault(); interval = setInterval(this.rewResize.bind(this), 10); };
   this.stopInterval = function(e) {
-    e.preventDefault();
+    if (e.type !== 'contextmenu') e.preventDefault();
     Note.saveNotes();
     clearInterval(interval);
   };
