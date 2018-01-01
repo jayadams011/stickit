@@ -255,7 +255,6 @@ function Note() {
 //Recommended clip values: 3-5 is a nice effect without too much of a performance hit
 Note.prototype.clipify = function(clipCount) {
   //Remove any leftover sfx classes and get note element
-  this.unrender();
   this.render();
   var noteEl = document.getElementById(this.id);
 
