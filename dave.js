@@ -175,6 +175,11 @@ function Note() {
   //handles moving the note, initiated with startMove
   this.move = function(offsetX, offsetY) {
     this.coords = [mouseX - offsetX, mouseY - offsetY];
+
+    //do not allow note to be moved to an unretrievable location
+    if (this.coords[0] < 0) this.coords[0] = 0;
+    if (this.coords[1] < 0) this.coords[1] = 0;
+
     this.render();
   };
 
