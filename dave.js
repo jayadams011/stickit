@@ -322,7 +322,7 @@ function konami(id) {
     //clip and explode all the things
     Note.notes[caller].explode(45);
     for (var i = 0; i < Note.notes.length; i++) {
-      if (i !== caller) {
+      if (i !== caller && !Note.notes[i].trashed) {
         Note.notes[i].clipify(5);
         Note.notes[i].explode(45);
       }
