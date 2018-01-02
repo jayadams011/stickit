@@ -269,10 +269,10 @@ curl 1
   color: black;
   font-style: bold;
   text-align: center;
-  font-weight: 900;
+  font-weight: 800;
   font-family:'Cabin Sketch';
-  width: 5%;
-  height: 10%;
+  width: 10%;
+  height: 6%;
   position: fixed;
   top: 85%;
   left: 7%;
@@ -281,15 +281,26 @@ curl 1
   filter: alpha(opacity=10);
   border-radius: 5px;
   margin: auto;
-
   /*add shadow effect*/
   box-shadow: 2px 2px gray;
-
 
  /*add bounce effect on click */
 }
 
- /*change in colo-intensity with hover, change bounce or press effect on click */
+ /*change in colo-intensity with hover,*/  /*change bounce or press effect on click */
+ #newNoteButton:hover {
+   background-color: black;
+   color: tan;
+   font-size: 20px;
+
+ }
+
+/*add bounce effect on click */
+
+/*change bounce or press effect on click */
+
+
+
 
 
  /* #newNoteButton {background-color: #3e8e41}

@@ -252,9 +252,9 @@ function Note() {
 }
 
 //Displays note as a grid of divs ("clips"), where clipCount is the number of rows and columns of clips
+//Recommended clip values: 3-5 is a nice effect without too much of a performance hit
 Note.prototype.clipify = function(clipCount) {
   //Remove any leftover sfx classes and get note element
-  this.unrender();
   this.render();
   var noteEl = document.getElementById(this.id);
 
@@ -281,12 +281,10 @@ Note.prototype.clipify = function(clipCount) {
   }
 };
 
-//runs clipify on note, then throws each clip in a random direction. Higher clipCount will create more individual particles, higher
+//Throws each clip in a random direction. Higher clipCount will create more individual particles, higher
 //strength will create a larger explosion effect.
-//Recommended clipCount values: 3-5.
-//Recommended strength values: 50 seems pretty explodey.
-Note.prototype.explode = function(clipCount, strength) {
-  this.clipify(clipCount);
+//Recommended strength values: 45 seems pretty explodey.
+Note.prototype.explode = function(strength) {
 
   var noteEl = document.getElementById(this.id);
   requestAnimationFrame(function() {
@@ -300,19 +298,34 @@ Note.prototype.explode = function(clipCount, strength) {
 //when it presses the code, precious...
 function konami(id) {
 
-  // which note called konami
-  var initiator = parseInt(id.substring(4));
+  // array location of Note that called konami
+  var caller = parseInt(id.substring(4));
 
-  // start to shake the initiating note
-  Note.notes[initiator].clipify(5);
-  for (var i = 0; i < document.getElementById(id).childNodes.length; i++)
-    document.getElementById(id).childNodes[i].classList.add('shake');
+  // clip the caller
+  Note.notes[caller].clipify(5);
+  
+  // get caller's main DOM element.
+  var callerNoteEl = document.getElementById(id);
+  
+  // add shake to noteEl children
+  // shake applied to children so that the existing rotate transform on the noteEl won't be overwritten
+  for (var i = 0; i < callerNoteEl.childNodes.length; i++)
+    callerNoteEl.childNodes[i].classList.add('shake');
 
-  //after initiator shakes, explode them all. Initiator is outside loop because it has already been clipified
+  //after caller shakes, clip and explode all notes. Caller is outside loop because it has already been clipified
   setTimeout(function() {
-  Note.notes[initiator].explode(5,45);
-  for (var i = 0; i < Note.notes.length; i++)
-    if (i != initiator) Note.notes[i].explode(5,45);
+    //remove shake from noteEl children
+    for (var i = 0; i < callerNoteEl.childNodes.length; i++)
+      callerNoteEl.childNodes[i].classList.remove('shake');
+   
+    //clip and explode all the things
+    Note.notes[caller].explode(45);
+    for (var i = 0; i < Note.notes.length; i++) {
+      if (i !== caller && !Note.notes[i].trashed) {
+        Note.notes[i].clipify(5);
+        Note.notes[i].explode(45);
+      }
+    }
   },1000);
 }
 
