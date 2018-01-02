@@ -198,6 +198,9 @@ body>div:first-child {
   cursor: nwse-resize;
 }
 
+/*=============================================
+curl 1
+==============================================*/
 .curl1 {
   -webkit-box-shadow: 2px 2px 3px 2px #000;
 }
