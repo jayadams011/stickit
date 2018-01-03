@@ -253,7 +253,7 @@ body>div:first-child {
   top: 80%;
   max-width:300px;
   background: #000;
-  box-shadow: 0 15px 10px #3c3c3c;
+  box-shadow: 0 15px 10px #000;
   transform: rotate(3deg);
 }
 
@@ -268,7 +268,7 @@ body>div:first-child {
   top: 80%;
   max-width:300px;
   background: #000;
-  box-shadow: 0 35px 20px #3c3c3c;
+  box-shadow: 0 35px 20px #000;
   transform: rotate(-8deg);
 }
 .curl5:after
