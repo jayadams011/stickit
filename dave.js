@@ -235,8 +235,8 @@ function Note() {
 
   //save contents of note before unrendering... and check for konami
   this.save = function() {
-    this.title = document.getElementById(this.id).childNodes[1].value;
-    this.contents = document.getElementById(this.id).childNodes[3].value;
+    this.title = document.getElementById(this.id).childNodes[2].value;
+    this.contents = document.getElementById(this.id).childNodes[4].value;
     Note.saveNotes();
     if (this.contents === 'upupdowndownleftrightleftrightba') konami(this.id);
   };
