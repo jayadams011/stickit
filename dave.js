@@ -74,6 +74,7 @@ function Note() {
     //create Elements
     var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
+    var noteGFilterEl = document.createElement('div');
     var noteFilterEl = document.createElement('div');
     var noteTitleEl = document.createElement('input');
     var noteTrashEl = document.createElement('div');
@@ -107,6 +108,7 @@ function Note() {
     noteEl.setAttribute('id', this.id);
     noteEl.style.transform = 'rotate(' + this.tilt + 'deg)';
     noteEl.style.visibility = 'visible';
+    noteGFilterEl.setAttribute('class', 'noteGFilter');
     noteFilterEl.setAttribute('class', 'noteFilter');
     noteFilterEl.style.background = this.filterColor;
     noteTitleEl.setAttribute('class', 'noteTitle');
@@ -152,6 +154,7 @@ function Note() {
 
     //build note element and attach to DOM
     bodyEl.appendChild(noteEl);
+    noteEl.appendChild(noteGFilterEl);
     noteEl.appendChild(noteFilterEl);
     noteEl.appendChild(noteTitleEl);
     noteEl.appendChild(noteTrashEl);
