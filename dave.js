@@ -259,7 +259,7 @@ function Note() {
     Note.saveNotes();
     this.sfx = 'trashing';
     this.render();
-    setTimeout(function() {this.unrender();}.bind(this),1500);
+    setTimeout(function() {this.unrender();}.bind(this),1400);
   };
 
 }
