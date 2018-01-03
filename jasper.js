@@ -30,7 +30,13 @@ function renderTrashbin(){
   var binbackground = document.createElement('div');
   binbackground.setAttribute('class', 'trashbin');
   document.querySelector('body').appendChild(binbackground);
+
+  trashButton.removeEventListener('click', renderTrashbin);
+  document.onclick = unrenderTrashbin;
 };
 
-//set addEventListener to "un" renderTrashbin
-trashButton.addEventListener('click', renderTrashbin);
+
+function unrenderTrashbin(){
+  var eDiv = document.querySelector('.trashbin');
+  eDiv.parentNode.removeChild(eDiv);
+};

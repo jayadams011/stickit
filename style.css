@@ -98,16 +98,17 @@ body>div:first-child {
 }
 
 .trashbin {
+  z-index: 5;
   position: absolute;
   color: yellow;
-  width: 370px;
-  height: 370px;
-  margin-top: 200px;
-  margin-left: 300px;
-
+  width: 450px;
+  height: 450px;
+  top: 100px;
+  left: 200px;
   background-color: black;
-  outline-style: solid red 2px;
+  outline-style: solid;
   outline-color: red;
+  outline-width: 3px;
 }
 
 .note {
