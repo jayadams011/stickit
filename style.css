@@ -1,61 +1,7 @@
-/*
-* {
-  outline: 1px dotted orange;
-}
-*/
-
-.note {
-  position: absolute;
-  /*box-shadow: 2px 2px 3px #000;*/
-  border: 1px solid #000;
-  -webkit-backface-visibility: hidden;
-  opacity: 1;
-}
-
-.clip {
-  transition: all .6s ease-out;
-}
-
-.newnote {
-  animation: waggle 350ms linear;
-}
-
-.loadnote {
-  animation: pop 350ms linear;
-}
-
-.shake {
-  animation: shake 70ms linear infinite;
-}
-
-@keyframes shake {
-  25% { transform: translate(2px); }
-  75% { transform: translate(-2px); }
-}
-
-@keyframes waggle {
-  25% { transform: rotate(15deg); }
-  50% { transform: rotate(-10deg); }
-  75% { transform: rotate(8deg); }
-  100% { transform: rotate(0deg); }
-}
-
-@keyframes pop {
-  0% { transform: scale(.1); }
-  25% { transform: scale(.3); }
-  50% { transform: scale(.8); }
-  75% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
 body {
    background: url("assets/pin-board-67130_1280.jpg") no-repeat center center fixed;
    background-size: 100% 100%;
-   position: relative;
-   z-index: 1;
-}
-
-   /*background-repeat: no-repeat;*/
+   overflow: hidden;
 }
 
 body>div:first-child {
@@ -70,17 +16,50 @@ body>div:first-child {
   left: 35%;
 }
 
-.note:hover .noteTrash {
-  display: inline;
+#newNoteButton {
+  background-color: tan;
+  color: black;
+  font-style: bold;
+  text-align: center;
+  font-weight: 595;
+  font-size: 32px;
+  font-family:'Cabin Sketch';
+  width: 150px;
+  height: 30px;
+  position: fixed;
+  top: 85%;
+  left: 7%;
+  /* border-bottom: double; */
+  opacity: 0.9;
+  filter: alpha(opacity=10);
+  border-radius: 5px;
+  margin: auto;
+  /*add shadow effect*/
+  box-shadow: 2px 2px black;
+  padding: 5px 0;
 }
 
-.note:hover .noteTitle {
-  border-bottom: 1px solid black;
+#newNoteButton:hover {
+  background-color: black;
+  padding-top: 10px;
+  height: 25px;
+  color: tan;
+  font-size: 20px;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 1000ms;
 }
 
-.note:hover .noteSetFColor {
-  display: block;
+.note {
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  opacity: 1;
+  border: 1px solid #000;
 }
+
+.note:hover .noteTrash { display: inline; }
+.note:hover .noteTitle { border-bottom: 1px solid black; }
+.note:hover > .noteSetFColor { opacity: .8; }
 
 .noteGFilter {
   position: absolute;
@@ -89,7 +68,6 @@ body>div:first-child {
   width: 100%;
   height: 100%;
   background: radial-gradient(#fff, #eee, #ccc);
-  opacity: 1;
 }
 
 .noteFilter {
@@ -173,16 +151,15 @@ body>div:first-child {
 
 .noteSetFColor {
   position: absolute;
-  display: none;
   width: 25px;
   right: -30px;
   top: 10px;
   padding-left: 5px;
-  opacity: .8;
+  opacity: 0;
 }
 
 .noteSetFColor:hover {
-  display: block;
+  opacity: .8;
 }
 
 .noteSetFColor div {
@@ -213,12 +190,8 @@ body>div:first-child {
   cursor: nwse-resize;
 }
 
-
-.curl1 {
-  -webkit-box-shadow: 2px 2px 8px 2px #000;
-}
-
-.curl2{}
+/*curl code mostly from paullund.co.uk*/
+.curl1 { -webkit-box-shadow: 1px 1px 4px 1px #000; }
 
 .curl2:before, .curl2:after
 {
@@ -230,11 +203,12 @@ body>div:first-child {
   width: 100%;
   top: 92%;
   max-width:242px;
-  background: #303030;
-  -webkit-box-shadow: 0 15px 10px #3C3C3C;
+  background: #000;
+  -webkit-box-shadow: 0 15px 10px #000;
   -webkit-transform: rotate(-3deg);
   -webkit-overflow: hidden;
 }
+
 .curl2:after
 {
   -webkit-transform: rotate(3deg);
@@ -242,9 +216,6 @@ body>div:first-child {
   left: auto;
   overflow: hidden;
 }
-
-
-.curl3{}
 
 .curl3:before, .curl3:after
 {
@@ -257,7 +228,7 @@ body>div:first-child {
   width: 80%;
   top: 92%;
   background: #000;
-  -webkit-box-shadow: 0 15px 10px 0px #3c3c3c;
+  -webkit-box-shadow: 0 15px 10px 0px #000;
   -webkit-transform: rotate(-3deg);
 
 }
@@ -269,8 +240,6 @@ body>div:first-child {
   left: auto;
   overflow: hidden;
 }
-
-.curl4{}
 
 .curl4:after
 {
@@ -287,8 +256,6 @@ body>div:first-child {
   box-shadow: 0 15px 10px #3c3c3c;
   transform: rotate(3deg);
 }
-
-.curl5{}
 
 .curl5:before, .curl5:after
 {
@@ -312,9 +279,7 @@ body>div:first-child {
 }
 
 .curl6
-{
-        box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-}
+{ box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; }
 .curl6:before, .curl6:after
 {
 	content:"";
@@ -334,67 +299,35 @@ body>div:first-child {
     transform:skew(8deg) rotate(3deg);
 }
 
-
-
-#newNoteButton {
-  background-color: tan;
-  color: black;
-  font-style: bold;
-  text-align: center;
-  font-weight: 595;
-  font-size: 32px;
-  font-family:'Cabin Sketch';
-  width: 150px;
-  height: 30px;
-  position: fixed;
-  top: 85%;
-  left: 7%;
-  /* border-bottom: double; */
-  opacity: 0.9;
-  filter: alpha(opacity=10);
-  border-radius: 5px;
-  margin: auto;
-  /*add shadow effect*/
-  box-shadow: 2px 2px black;
-  padding: 5px 0;
-}
-
- /*change in colo-intensity with hover,*/  /*change bounce or press effect on click */
- #newNoteButton:hover {
-   background-color: black;
-   padding-top: 10px;
-   height: 25px;
-   color: tan;
-   font-size: 20px;
-  cursor: pointer;
-   transition-property: all;
-   transition-duration: 1000ms;
-
- }
-
-/*add bounce effect on click */
-
-/*change bounce or press effect on click */
-
-
-
-
-
- /* #newNoteButton {background-color: #3e8e41}
-
- #newNoteButton {
-   background-color: #3e8e41;
-   box-shadow: 0 5px #666;
-   transform: translateY(4px);
-   }
-
-/*curl code mostly from paullund.co.uk*/
-
-.trashing {
-  animation: spindrop 1.5s ease-in;
-}
+.clip { transition: all .6s ease-out; }
+.newnote { animation: waggle 350ms linear; }
+.loadnote { animation: pop 350ms linear; }
+.shake { animation: shake 70ms linear infinite; }
+.trashing { animation: spindrop 1.5s ease-in; }
 
 @keyframes spindrop {
-  100% {transform: rotate(720deg);
-        top:1500px;}
+  100% {
+    transform: rotate(720deg);
+    top:1500px;
+  }
+}
+
+@keyframes shake {
+  25% { transform: translate(2px); }
+  75% { transform: translate(-2px); }
+}
+
+@keyframes waggle {
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-10deg); }
+  75% { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes pop {
+  0% { transform: scale(.1); }
+  25% { transform: scale(.3); }
+  50% { transform: scale(.8); }
+  75% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }

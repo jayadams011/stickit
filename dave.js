@@ -177,34 +177,40 @@ function Note() {
 
   //handles moving the note, initiated with startMove
   this.move = function(offsetX, offsetY) {
+    var oldX = this.coords[0];
+    var oldY = this.coords[1];
     this.coords = [mouseX - offsetX, mouseY - offsetY];
 
     //do not allow note to be moved to an unretrievable location
     if (this.coords[0] < 0) this.coords[0] = 0;
     if (this.coords[1] < 0) this.coords[1] = 0;
-
-    this.render();
+    
+    if (this.coords[0]!==oldX || this.coords[1]!==oldY) this.render();
   };
 
   //handle resizing the note
   var minWidth = 150;
   var minHeight = 150;
   this.nwseResize = function() {
+    var oldW = this.width;
+    var oldH = this.height;
     this.width = mouseX - this.coords[0];
     this.height = mouseY - this.coords[1];
     if (this.width < minWidth) this.width = minWidth;
     if (this.height < minHeight) this.height = minHeight;
-    this.render();
+    if (this.width !== oldW || this.height !== oldH) this.render();
   };
   this.nsResize = function() {
+    var oldH = this.height;
     this.height = mouseY - this.coords[1];
     if (this.height < minHeight) this.height = minHeight;
-    this.render();
+    if (this.height !== oldH) this.render();
   };
   this.rewResize = function() {
+    var oldW = this.width;
     this.width = mouseX - this.coords[0];
     if (this.width < minWidth) this.width = minWidth;
-    this.render();
+    if (this.width !== oldW) this.render();
   };
   this.lewResize = function() {
     var oldX = this.coords[0];
@@ -212,7 +218,7 @@ function Note() {
     this.coords[0] = mouseX;
     if (this.coords[0] > maxX) this.coords[0] = maxX;
     this.width -= this.coords[0] - oldX;
-    this.render();
+    if (this.coords[0] !== oldX) this.render();
   };
 
   //intervals for move and resize functions
@@ -235,8 +241,8 @@ function Note() {
 
   //save contents of note before unrendering... and check for konami
   this.save = function() {
-    this.title = document.getElementById(this.id).childNodes[1].value;
-    this.contents = document.getElementById(this.id).childNodes[3].value;
+    this.title = document.getElementById(this.id).childNodes[2].value;
+    this.contents = document.getElementById(this.id).childNodes[4].value;
     Note.saveNotes();
     if (this.contents === 'upupdowndownleftrightleftrightba') konami(this.id);
   };
