@@ -50,6 +50,41 @@ body>div:first-child {
   transition-duration: 1000ms;
 }
 
+#trashButton {
+  background-color: tan;
+  color: black;
+  font-style: bold;
+  text-align: center;
+  font-weight: 595;
+  font-size: 32px;
+  font-family:'Cabin Sketch';
+  width: 150px;
+  height: 30px;
+  position: fixed;
+  top: 85%;
+  right: 7%;
+  /* border-bottom: double; */
+  opacity: 0.9;
+  filter: alpha(opacity=10);
+  border-radius: 5px;
+  margin: auto;
+  /*add shadow effect*/
+  box-shadow: 2px 2px black;
+  padding: 5px 0;
+}
+
+#trashButton:hover {
+  background-color: black;
+  padding-top: 10px;
+  height: 25px;
+  color: tan;
+  font-size: 20px;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 1000ms;
+}
+
+
 .note {
   position: absolute;
   -webkit-backface-visibility: hidden;
