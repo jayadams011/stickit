@@ -74,6 +74,7 @@ function Note() {
     //create Elements
     var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
+    var noteGFilterEl = document.createElement('div');
     var noteFilterEl = document.createElement('div');
     var noteTitleEl = document.createElement('input');
     var noteTrashEl = document.createElement('div');
@@ -107,6 +108,7 @@ function Note() {
     noteEl.setAttribute('id', this.id);
     noteEl.style.transform = 'rotate(' + this.tilt + 'deg)';
     noteEl.style.visibility = 'visible';
+    noteGFilterEl.setAttribute('class', 'noteGFilter');
     noteFilterEl.setAttribute('class', 'noteFilter');
     noteFilterEl.style.background = this.filterColor;
     noteTitleEl.setAttribute('class', 'noteTitle');
@@ -152,6 +154,7 @@ function Note() {
 
     //build note element and attach to DOM
     bodyEl.appendChild(noteEl);
+    noteEl.appendChild(noteGFilterEl);
     noteEl.appendChild(noteFilterEl);
     noteEl.appendChild(noteTitleEl);
     noteEl.appendChild(noteTrashEl);
@@ -244,11 +247,15 @@ function Note() {
     this.render();
   };
 
+  //removes note from the DOM
   this.trash = function() {
     this.trashed = true;
-    this.unrender();
     Note.saveNotes();
+    this.sfx = 'trashing';
+    this.render();
+    setTimeout(function() {this.unrender();}.bind(this),1500);
   };
+
 }
 
 //Displays note as a grid of divs ("clips"), where clipCount is the number of rows and columns of clips
@@ -303,10 +310,10 @@ function konami(id) {
 
   // clip the caller
   Note.notes[caller].clipify(5);
-  
+
   // get caller's main DOM element.
   var callerNoteEl = document.getElementById(id);
-  
+
   // add shake to noteEl children
   // shake applied to children so that the existing rotate transform on the noteEl won't be overwritten
   for (var i = 0; i < callerNoteEl.childNodes.length; i++)
@@ -317,7 +324,7 @@ function konami(id) {
     //remove shake from noteEl children
     for (var i = 0; i < callerNoteEl.childNodes.length; i++)
       callerNoteEl.childNodes[i].classList.remove('shake');
-   
+
     //clip and explode all the things
     Note.notes[caller].explode(45);
     for (var i = 0; i < Note.notes.length; i++) {
