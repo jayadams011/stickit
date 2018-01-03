@@ -57,17 +57,9 @@ body>div:first-child {
   opacity: 1;
 }
 
-.note:hover .noteTrash {
-  display: inline;
-}
-
-.note:hover .noteTitle {
-  border-bottom: 1px solid black;
-}
-
-.note:hover .noteSetFColor {
-  display: block;
-}
+.note:hover .noteTrash { display: inline; }
+.note:hover .noteTitle { border-bottom: 1px solid black; }
+.note:hover > .noteSetFColor { display: block;}
 
 .noteGFilter {
   position: absolute;
