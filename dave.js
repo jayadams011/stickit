@@ -192,21 +192,25 @@ function Note() {
   var minWidth = 150;
   var minHeight = 150;
   this.nwseResize = function() {
+    var oldW = this.width;
+    var oldH = this.height;
     this.width = mouseX - this.coords[0];
     this.height = mouseY - this.coords[1];
     if (this.width < minWidth) this.width = minWidth;
     if (this.height < minHeight) this.height = minHeight;
-    this.render();
+    if (this.width !== oldW || this.height !== oldH) this.render();
   };
   this.nsResize = function() {
+    var oldH = this.height;
     this.height = mouseY - this.coords[1];
     if (this.height < minHeight) this.height = minHeight;
-    this.render();
+    if (this.height !== oldH) this.render();
   };
   this.rewResize = function() {
+    var oldW = this.width;
     this.width = mouseX - this.coords[0];
     if (this.width < minWidth) this.width = minWidth;
-    this.render();
+    if (this.width !== oldW) this.render();
   };
   this.lewResize = function() {
     var oldX = this.coords[0];
@@ -214,7 +218,7 @@ function Note() {
     this.coords[0] = mouseX;
     if (this.coords[0] > maxX) this.coords[0] = maxX;
     this.width -= this.coords[0] - oldX;
-    this.render();
+    if (this.coords[0] !== oldX) this.render();
   };
 
   //intervals for move and resize functions
