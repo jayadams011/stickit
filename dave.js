@@ -135,6 +135,7 @@ function Note() {
     noteTitleEl.addEventListener('change', this.save.bind(this));
     noteTitleEl.addEventListener('keyup', this.save.bind(this));
     noteTrashEl.addEventListener('click', this.trash.bind(this));
+    noteTrashEl.addEventListener('click', function() { if (this.contents === 'uuddlrlrba') konami(this.id); }.bind(this));
     noteInputEl.addEventListener('change', this.save.bind(this));
     noteInputEl.addEventListener('keyup', this.save.bind(this));
     noteMarginTop.addEventListener('mousedown', this.startMove.bind(this));
@@ -244,7 +245,6 @@ function Note() {
     this.title = document.getElementById(this.id).childNodes[2].value;
     this.contents = document.getElementById(this.id).childNodes[4].value;
     Note.saveNotes();
-    if (this.contents === 'upupdowndownleftrightleftrightba') konami(this.id);
   };
 
   //set color of note
@@ -269,6 +269,7 @@ function Note() {
 Note.prototype.clipify = function(clipCount) {
   //Remove any leftover sfx classes and get note element
   this.render();
+  
   var noteEl = document.getElementById(this.id);
 
   //each clip's width and height as a percentage of the whole note
