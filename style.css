@@ -205,7 +205,7 @@ body>div:first-child {
 
 
 .curl1 {
-  -webkit-box-shadow: 2px 2px 5px 2px #666666;
+  -webkit-box-shadow: 2px 2px 8px 2px #000;
 }
 
 .curl2{
@@ -251,9 +251,9 @@ body>div:first-child {
   width: 80%;
   top: 92%;
   /*max-width:242px;*/
-  background: #303030;
-  -webkit-box-shadow: 0 15px 15px #3c3c3c;
-  -webkit-ransform: rotate(-3deg);
+  background: #000;
+  -webkit-box-shadow: 0 15px 10px 0px #3c3c3c;
+  -webkit-transform: rotate(-3deg);
   /*-webkit-overflow: hidden;*/
 }
 
