@@ -51,6 +51,11 @@
 body {
    background: url("assets/pin-board-67130_1280.jpg") no-repeat center center fixed;
    background-size: 100% 100%;
+   background-color: #ffffff;*/
+   .myDiv {
+    position: relative;
+    z-index: 1;
+}
 
    /*background-repeat: no-repeat;*/
 }
@@ -85,7 +90,7 @@ body>div:first-child {
   bottom: 0px;
   width: 100%;
   height: 100%;
-  opacity: .5;
+  opacity: 1;
   cursor: move;
 }
 
@@ -198,67 +203,69 @@ body>div:first-child {
   cursor: nwse-resize;
 }
 
+
 .curl1 {
-  -webkit-box-shadow: 2px 2px 3px 2px #000;
+  -webkit-box-shadow: 2px 2px 5px 2px #666666;
 }
 
-.curl{}
-
-  .box h3{
-	text-align:center;
-	position:relative;
-	top:80px;
+.curl2{
+  /*position:relative;*/
 }
-.box {
-	width:70%;
-	height:200px;
-	background:#FFF;
-	margin:40px auto;
-}
-
-/*==================================================
- * curl 2
- * ===============================================*/
-.curl2{}
 
 .curl2:before, .curl2:after
 {
-  z-index: -5;
+  z-index: -1;
   position: absolute;
   content: "";
   bottom: 15px;
   left: 5px;
   width: 100%;
   top: 92%;
-  max-width:240px;
-  background: #777;
-  -webkit-box-shadow: 0 15px 10px #777;
-  box-shadow: 0 15px 10px #777;
-  -webkit-transform: rotate(-5deg);
+  max-width:242px;
+  background: #303030;
+  -webkit-box-shadow: 0 15px 10px #3C3C3C;
+  -webkit-transform: rotate(-3deg);
+  -webkit-overflow: hidden;
 }
-.effect2:after
+.curl2:after
 {
-  -webkit-transform: rotate(5deg);
+  -webkit-transform: rotate(3deg);
   right: 5px;
   left: auto;
+  overflow: hidden;
 }
 
-.curl3{}
 
-.curl3:after
+.curl3{
+  /*position: relative;**/
+}
+
+.curl3:before, .curl3:after
 {
   z-index: -1;
   position: absolute;
+  content: "";
   bottom: 15px;
-  right: 10px;
-  left: auto;
-  width: 50%;
-  top: 80%;
-  max-width:255px;
-  background: #777;
-  -webkit-box-shadow: 0 15px 10px #777;
-  -webkit-ransform: rotate(3deg);
+  left: 5px;
+  right: 35px;
+  width: 80%;
+  top: 92%;
+  /*max-width:242px;*/
+  background: #303030;
+  -webkit-box-shadow: 0 15px 15px #3c3c3c;
+  -webkit-ransform: rotate(-3deg);
+  /*-webkit-overflow: hidden;*/
 }
+
+.curl3:after
+{
+  -webkit-transform: rotate(1deg);
+  right: 5px;
+  left: auto;
+  overflow: hidden;
+}
+
+
 
 
 #newNoteButton {
