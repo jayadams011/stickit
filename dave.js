@@ -9,7 +9,7 @@ document.onmousemove = function(e) {
 };
 
 //var to hold note curl effect array
-Note.arrCurlNames = ['curl1','curl2','curl3'];
+Note.arrCurlNames = ['curl1','curl2','curl3','curl4','curl5','curl6'];
 
 //holder array and file system functions
 Note.notes = [];
@@ -302,11 +302,11 @@ Note.prototype.explode = function(strength) {
   var noteEl = document.getElementById(this.id);
   requestAnimationFrame(function() {
     for (var i = 0; i < noteEl.childNodes.length; i++) {
-      noteEl.childNodes[i].style.top = (Math.random()-.5)*100*strength + 'px';
-      noteEl.childNodes[i].style.left = (Math.random()-.5)*100*strength + 'px';
+      noteEl.childNodes[i].style.top = (Math.random() - .5) * 100 * strength + 'px';
+      noteEl.childNodes[i].style.left = (Math.random() - .5) * 100 * strength + 'px';
     }
   });
-}
+};
 
 //when it presses the code, precious...
 function konami(id) {
@@ -333,7 +333,7 @@ function konami(id) {
 
     //clip and explode all the things
     Note.notes[caller].explode(45);
-    for (var i = 0; i < Note.notes.length; i++) {
+    for ( i = 0; i < Note.notes.length; i++) {
       if (i !== caller && !Note.notes[i].trashed) {
         Note.notes[i].clipify(5);
         Note.notes[i].explode(45);

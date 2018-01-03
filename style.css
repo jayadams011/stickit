@@ -191,9 +191,7 @@ body>div:first-child {
 }
 
 /*curl code mostly from paullund.co.uk*/
-.curl1 {
-  -webkit-box-shadow: 1px 1px 4px 1px #000;
-}
+.curl1 { -webkit-box-shadow: 1px 1px 4px 1px #000; }
 
 .curl2:before, .curl2:after
 {
@@ -229,11 +227,10 @@ body>div:first-child {
   right: 35px;
   width: 80%;
   top: 92%;
-  /*max-width:242px;*/
   background: #000;
   -webkit-box-shadow: 0 15px 10px 0px #000;
   -webkit-transform: rotate(-3deg);
-  /*-webkit-overflow: hidden;*/
+
 }
 
 .curl3:after
@@ -242,6 +239,64 @@ body>div:first-child {
   right: 5px;
   left: auto;
   overflow: hidden;
+}
+
+.curl4:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  right: 10px;
+  left: auto;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #000;
+  box-shadow: 0 15px 10px #3c3c3c;
+  transform: rotate(3deg);
+}
+
+.curl5:before, .curl5:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #000;
+  box-shadow: 0 35px 20px #3c3c3c;
+  transform: rotate(-8deg);
+}
+.curl5:after
+{
+  transform: rotate(8deg);
+  right: 10px;
+  left: auto;
+}
+
+.curl6
+{ box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; }
+.curl6:before, .curl6:after
+{
+	content:"";
+    position:absolute;
+    z-index:-1;
+    box-shadow:0 0 15px rgba(0,0,0,0.8);
+    top:10px;
+    bottom:10px;
+    left:0;
+    right:0;
+    border-radius:100px / 10px;
+}
+.curl6:after
+{
+    right:10px;
+    left:auto;
+    transform:skew(8deg) rotate(3deg);
 }
 
 .clip { transition: all .6s ease-out; }
