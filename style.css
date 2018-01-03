@@ -54,7 +54,7 @@ body>div:first-child {
   position: absolute;
   -webkit-backface-visibility: hidden;
   opacity: 1;
-  border: 10px solid transparent;
+  border: 1px solid #000;
 }
 
 .note:hover .noteTrash { display: inline; }
@@ -68,7 +68,6 @@ body>div:first-child {
   width: 100%;
   height: 100%;
   background: radial-gradient(#fff, #eee, #ccc);
-  outline: 1px solid #000;
 }
 
 .noteFilter {
