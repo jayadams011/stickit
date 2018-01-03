@@ -50,6 +50,19 @@ body>div:first-child {
   transition-duration: 1000ms;
 }
 
+#whitespace {
+  position: absolute;
+  top-margin: 300px;
+  bottom-margin: 25px;
+  right: 25px;
+  height: 200px;
+  width: 300px
+
+  background-color: white;
+  border-width: 3px;
+  border-color: #301600;
+}
+
 #trashButton {
   background-color: tan;
   color: black;
@@ -83,6 +96,10 @@ body>div:first-child {
   transition-property: all;
   transition-duration: 1000ms;
 }
+
+
+
+
 
 
 .note {

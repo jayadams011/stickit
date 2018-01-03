@@ -15,3 +15,10 @@ function addNote(){
   //render 'note' to screen.
   note.render(); //i.e - render the actual 'note' to the sceen on the idea 'Note'..
 };
+
+
+//addEventListener to load trash div image to screen.
+
+var trashButton = document.getElementById('whitespace');
+
+trashButton.addEventListener('click', addwhitespace);
