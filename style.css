@@ -50,17 +50,17 @@ body>div:first-child {
   transition-duration: 1000ms;
 }
 
-#whitespace {
+#trashbin {
   position: absolute;
-  top-margin: 300px;
-  bottom-margin: 25px;
-  right: 25px;
-  height: 200px;
-  width: 300px
+  top-margin: 30px;
+  bottom-margin: 5px;
+  right: 5px;
+  height: 20px;
+  width: 30px
 
-  background-color: white;
-  border-width: 3px;
-  border-color: #301600;
+  background-color: black;
+  border-width: 1px;
+  border-color: red;
 }
 
 #trashButton {
@@ -97,10 +97,18 @@ body>div:first-child {
   transition-duration: 1000ms;
 }
 
+.trashbin {
+  position: absolute;
+  color: yellow;
+  width: 370px;
+  height: 370px;
+  margin-top: 200px;
+  margin-left: 300px;
 
-
-
-
+  background-color: black;
+  outline-style: solid red 2px;
+  outline-color: red;
+}
 
 .note {
   position: absolute;

@@ -17,8 +17,20 @@ function addNote(){
 };
 
 
+
+
+
 //addEventListener to load trash div image to screen.
 
-var trashButton = document.getElementById('whitespace');
+var trashButton = document.getElementById('trashButton');
 
-trashButton.addEventListener('click', addwhitespace);
+trashButton.addEventListener('click', renderTrashbin);
+
+function renderTrashbin(){
+  var binbackground = document.createElement('div');
+  binbackground.setAttribute('class', 'trashbin');
+  document.querySelector('body').appendChild(binbackground);
+};
+
+//set addEventListener to "un" renderTrashbin
+trashButton.addEventListener('click', renderTrashbin);
