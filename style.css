@@ -6,10 +6,10 @@
 
 .note {
   position: absolute;
-  background: radial-gradient(#fff, #eee, #ddd);
   /*box-shadow: 2px 2px 3px #000;*/
   border: 1px solid #000;
   -webkit-backface-visibility: hidden;
+  opacity: 1;
 }
 
 .clip {
@@ -79,13 +79,23 @@ body>div:first-child {
   display: block;
 }
 
+.noteGFilter {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(#fff, #eee, #ccc);
+  opacity: 1;
+}
+
 .noteFilter {
   position: relative;
   top: 0px;
   bottom: 0px;
   width: 100%;
   height: 100%;
-  opacity: .5;
+  opacity: .3;
   cursor: move;
 }
 
