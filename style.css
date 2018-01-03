@@ -314,3 +314,12 @@ body>div:first-child {
    }
 
 /*curl code mostly from paullund.co.uk*/
+
+.trashing {
+  animation: spindrop 1.5s ease-in;
+}
+
+@keyframes spindrop {
+  100% {transform: rotate(720deg);
+        top:1500px;}
+}
