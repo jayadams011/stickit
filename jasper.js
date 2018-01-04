@@ -22,14 +22,17 @@ function addNote(){
 
 /**********************TRASHBIN****************************/
 var trashButton = document.getElementById('trashButton');
-trashButton.addEventListener('click', renderTrashToggle);
+trashButton.addEventListener('click', trashToggle);
 
-function renderTrashToggle() {
+function trashToggle() {
   var binEl = document.querySelector('.trashbin');
   if (binEl) binEl.parentNode.removeChild(binEl);
   else {
     binEl = document.createElement('div');
     binEl.setAttribute('class', 'trashbin');
     document.querySelector('body').appendChild(binEl);
+
+    for (var i = 0; i < Note.notes.length; i++)
+      if (Note.notes[i].trashed) Note.notes[i].render('.trashbin');
   }
 };
