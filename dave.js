@@ -262,6 +262,7 @@ function Note() {
     Note.saveNotes();
     this.sfx = 'trashing';
     this.render();
+    this.sfx = 'trashed';
     setTimeout(function() {this.unrender();}.bind(this),1400);
   };
 

@@ -99,16 +99,26 @@ body>div:first-child {
 
 .trashbin {
   z-index: 5;
-  position: absolute;
-  color: yellow;
-  width: 450px;
-  height: 450px;
+  position: relative;
+  width: 600px;
+  height: 700px;
   top: 100px;
   left: 200px;
-  background-color: black;
+  background-color: #d8d8d8;
   outline-style: solid;
-  outline-color: red;
-  outline-width: 3px;
+  outline-color: brown;
+  outline-width: 2px;
+}
+
+.trashbin > div {
+  z-index: 6;
+  transform: scale(.3) !important;
+  float: left;
+  transition: all 200ms ease-out;
+}
+
+.trashbin > div:hover {
+  transform: scale(1) !important;
 }
 
 .note {
