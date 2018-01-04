@@ -258,6 +258,7 @@ function Note() {
   this.setfColor = function(color) {
     this.filterColor = color;
     this.render();
+    this.save();
   };
 
   //removes note from the DOM, rerenders to trashbin if trashbin is rendered.
