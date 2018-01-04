@@ -20,23 +20,16 @@ function addNote(){
 
 
 
-//addEventListener to load trash div image to screen.
-
+/**********************TRASHBIN****************************/
 var trashButton = document.getElementById('trashButton');
+trashButton.addEventListener('click', renderTrashToggle);
 
-trashButton.addEventListener('click', renderTrashbin);
-
-function renderTrashbin(){
-  var binbackground = document.createElement('div');
-  binbackground.setAttribute('class', 'trashbin');
-  document.querySelector('body').appendChild(binbackground);
-
-  trashButton.removeEventListener('click', renderTrashbin);
-  document.onclick = unrenderTrashbin;
-};
-
-
-function unrenderTrashbin(){
-  var eDiv = document.querySelector('.trashbin');
-  eDiv.parentNode.removeChild(eDiv);
+function renderTrashToggle() {
+  var binEl = document.querySelector('.trashbin');
+  if (binEl) binEl.parentNode.removeChild(binEl);
+  else {
+    binEl = document.createElement('div');
+    binEl.setAttribute('class', 'trashbin');
+    document.querySelector('body').appendChild(binEl);
+  }
 };
