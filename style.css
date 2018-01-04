@@ -113,14 +113,13 @@ body>div:first-child {
 .trashbin > div {
   position: relative;
   z-index: 6;
+  margin: -10%;
   transform: scale(.3) !important;
   float: left;
   transition: all 200ms ease-out;
 }
 
-.trashbin > div:hover {
-  transform: scale(1) !important;
-}
+.trashbin > div:hover { transform: scale(1) !important;}
 
 .note {
   position: absolute;
