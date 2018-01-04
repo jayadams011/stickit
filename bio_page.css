@@ -64,6 +64,11 @@ body {
 }
 h2 {
   font-family: 'Architects Daughter', cursive;
+  font-size: 30px;
+}
+.likes {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
 }
 /* used Jaspers button from the main page */
 .button {
