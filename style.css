@@ -98,7 +98,6 @@ body>div:first-child {
 }
 
 .trashbin {
-  z-index: 5;
   position: relative;
   width: 600px;
   height: 700px;
@@ -112,7 +111,6 @@ body>div:first-child {
 
 .trashbin > div {
   position: relative;
-  z-index: 6;
   margin: -10%;
   transform: scale(.3) !important;
   float: left;
