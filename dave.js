@@ -7,6 +7,8 @@ document.onmousemove = function(e) {
   mouseX = e.clientX;
   mouseY = e.clientY;
 };
+//context used for rendering notes
+var renderContext = 'window';
 
 //var to hold note curl effect array
 Note.arrCurlNames = ['curl1','curl2','curl3','curl4','curl5','curl6'];
@@ -24,7 +26,7 @@ Note.loadNotes = function() {
 
 //actions performed on unload
 Note.onExit = function() {
-  for (var i = 0; i < Note.notes.length; i++) Note.notes[i].sfx = 'loadnote';
+  for (var i = 0; i < Note.notes.length; i++) if(!Notes.notes[i].trashed) Note.notes[i].sfx = 'loadnote';
   Note.saveNotes();
 };
 
@@ -67,12 +69,15 @@ function Note() {
     noteEl.parentNode.removeChild(noteEl);
   };
 
-  this.render = function() {
+  this.render = function(selector) {
+    //if specified, selector will be used by querySelector to define the parent element of the note.
+    //if unspecified, the <body> will be the parent element.
+    var parentEl = selector || 'body';
+    
     //unrender if already on screen
     if (document.getElementById(this.id)) this.unrender();
 
     //create Elements
-    var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
     var noteGFilterEl = document.createElement('div');
     var noteFilterEl = document.createElement('div');
@@ -132,6 +137,7 @@ function Note() {
 
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
+    noteFilterEl.addEventListener('mouseup', function() {if (renderContext === '.trashbin') { this.unrender(); this.coords = [0,0]; this.trashed = true; this.render(renderContext); } else this.trashed = false;}.bind(this));
     noteTitleEl.addEventListener('change', this.save.bind(this));
     noteTitleEl.addEventListener('keyup', this.save.bind(this));
     noteTrashEl.addEventListener('click', this.trash.bind(this));
@@ -154,7 +160,7 @@ function Note() {
     window.addEventListener('unload', Note.onExit);
 
     //build note element and attach to DOM
-    bodyEl.appendChild(noteEl);
+    document.querySelector(parentEl).appendChild(noteEl);
     noteEl.appendChild(noteGFilterEl);
     noteEl.appendChild(noteFilterEl);
     noteEl.appendChild(noteTitleEl);
@@ -226,6 +232,7 @@ function Note() {
   var interval = 0;
   this.startMove = function(e) {
     e.preventDefault();
+    if (this.trashed) {this.coords[0] = document.getElementById(this.id).getBoundingClientRect().x; this.coords[1] = document.getElementById(this.id).getBoundingClientRect().y;}
     var offsetX = mouseX - this.coords[0];
     var offsetY = mouseY - this.coords[1];
     interval = setInterval(this.move.bind(this, offsetX, offsetY), 10);
@@ -253,13 +260,14 @@ function Note() {
     this.render();
   };
 
-  //removes note from the DOM
+  //removes note from the DOM, rerenders to trashbin if trashbin is rendered.
   this.trash = function() {
     this.trashed = true;
     Note.saveNotes();
     this.sfx = 'trashing';
     this.render();
-    setTimeout(function() {this.unrender();}.bind(this),1400);
+    this.sfx = 'trashed';
+    setTimeout(function() {this.unrender(); if (document.querySelector('.trashbin')) {this.coords = [0,0]; this.render('.trashbin');}}.bind(this),1400);
   };
 
 }
@@ -338,6 +346,7 @@ function konami(id) {
       if (i !== caller && !Note.notes[i].trashed) {
         Note.notes[i].clipify(5);
         Note.notes[i].explode(45);
+        Note.notes[i].trashed = true;
       }
     }
   },1000);
