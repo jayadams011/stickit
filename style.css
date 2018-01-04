@@ -99,10 +99,6 @@ body>div:first-child {
 
 .trashbin {
   position: relative;
-  width: 600px;
-  height: 700px;
-  top: 100px;
-  left: 200px;
   background-color: #d8d8d8;
   border: 3px dashed black;
   text-align: center;

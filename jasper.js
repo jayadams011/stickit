@@ -25,11 +25,10 @@ var trashButton = document.getElementById('trashButton');
 trashButton.addEventListener('click', trashToggle);
 
 var binTop = 200;
-var binRight = 800;
-var binBottom = 700;
-var binLeft = 400;
-
-setInterval(function() {if (document.querySelector('.trashbin') && mouseX > binLeft && mouseX < binRight && mouseY > binTop && mouseY < binBottom) renderContext = '.trashbin'; else renderContext = 'window';}, 50);
+var binLeft = 600;
+var binWidth = 600;
+var binHeight = 500;
+setInterval(function() {if (document.querySelector('.trashbin') && mouseX > binLeft && mouseX < binLeft+binWidth && mouseY > binTop && mouseY < binTop+binHeight) renderContext = '.trashbin'; else renderContext = 'window';}, 50);
 
 function trashToggle() {
   var binEl = document.querySelector('.trashbin');
@@ -38,9 +37,9 @@ function trashToggle() {
     binEl = document.createElement('div');
     binEl.setAttribute('class', 'trashbin');
     binEl.style.top = binTop + 'px';
-    binEl.style.right = binRight + 'px';
-    binEl.style.bottom = binBottom + 'px';
     binEl.style.left = binLeft + 'px';
+    binEl.style.width = binWidth + 'px';
+    binEl.style.height = binHeight + 'px';
     document.querySelector('body').appendChild(binEl);
     var tbTitleEl = document.createElement('h1');
     tbTitleEl.textContent = 'Le trash.';

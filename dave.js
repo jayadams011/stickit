@@ -346,6 +346,7 @@ function konami(id) {
       if (i !== caller && !Note.notes[i].trashed) {
         Note.notes[i].clipify(5);
         Note.notes[i].explode(45);
+        Note.notes[i].trashed = true;
       }
     }
   },1000);
