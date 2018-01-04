@@ -137,7 +137,7 @@ function Note() {
 
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
-    noteFilterEl.addEventListener('mouseup', function() {if (renderContext === '.trashbin') { this.unrender(); this.coords = [0,0]; this.trashed = true; this.render(renderContext); } else this.trashed = false;}.bind(this));
+    noteFilterEl.addEventListener('mouseup', function() {if (renderContext === '.trashbin') { this.unrender(); this.coords = [0,0]; this.trashed = true; this.render(renderContext); } else { this.trashed = false; this.render(); }}.bind(this));
     noteTitleEl.addEventListener('change', this.save.bind(this));
     noteTitleEl.addEventListener('keyup', this.save.bind(this));
     noteTrashEl.addEventListener('click', this.trash.bind(this));
@@ -258,6 +258,7 @@ function Note() {
   this.setfColor = function(color) {
     this.filterColor = color;
     this.render();
+    this.save();
   };
 
   //removes note from the DOM, rerenders to trashbin if trashbin is rendered.
