@@ -25,11 +25,11 @@ var trashButton = document.getElementById('trashButton');
 trashButton.addEventListener('click', trashToggle);
 
 var binTop = 200;
-var binRight = 700;
+var binRight = 800;
 var binBottom = 700;
-var binLeft = 200;
+var binLeft = 400;
 
-setInterval(function() {if (mouseX > binLeft && mouseX < binRight && mouseY > binTop && mouseY < binBottom) renderContext = '.trashbin'; else renderContext = 'window';}, 50);
+setInterval(function() {if (document.querySelector('.trashbin') && mouseX > binLeft && mouseX < binRight && mouseY > binTop && mouseY < binBottom) renderContext = '.trashbin'; else renderContext = 'window';}, 50);
 
 function trashToggle() {
   var binEl = document.querySelector('.trashbin');
@@ -42,6 +42,9 @@ function trashToggle() {
     binEl.style.bottom = binBottom + 'px';
     binEl.style.left = binLeft + 'px';
     document.querySelector('body').appendChild(binEl);
+    var tbTitleEl = document.createElement('h1');
+    tbTitleEl.textContent = 'Le trash.';
+    binEl.appendChild(tbTitleEl);
 
     for (var i = 0; i < Note.notes.length; i++)
       if (Note.notes[i].trashed) {
