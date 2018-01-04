@@ -30,6 +30,8 @@ function trashToggle() {
   else {
     binEl = document.createElement('div');
     binEl.setAttribute('class', 'trashbin');
+    binEl.addEventListener('mouseenter', function() {renderContext='.trashbin';});
+    binEl.addEventListener('mouseout', function() {renderContext='window';});
     document.querySelector('body').appendChild(binEl);
 
     for (var i = 0; i < Note.notes.length; i++)

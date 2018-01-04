@@ -7,6 +7,8 @@ document.onmousemove = function(e) {
   mouseX = e.clientX;
   mouseY = e.clientY;
 };
+//context used for rendering notes
+var renderContext = 'window';
 
 //var to hold note curl effect array
 Note.arrCurlNames = ['curl1','curl2','curl3','curl4','curl5','curl6'];
@@ -135,6 +137,7 @@ function Note() {
 
     //event listeners
     noteFilterEl.addEventListener('mousedown', this.startMove.bind(this));
+    noteFilterEl.addEventListener('mouseup', function() {if (renderContext === '.trashbin') { this.unrender(); this.coords = [0,0]; this.trashed = true; this.render(renderContext); } else this.trashed = false;}.bind(this));
     noteTitleEl.addEventListener('change', this.save.bind(this));
     noteTitleEl.addEventListener('keyup', this.save.bind(this));
     noteTrashEl.addEventListener('click', this.trash.bind(this));
@@ -229,6 +232,7 @@ function Note() {
   var interval = 0;
   this.startMove = function(e) {
     e.preventDefault();
+    if (this.trashed) {this.coords[0] = document.getElementById(this.id).getBoundingClientRect().x; this.coords[1] = document.getElementById(this.id).getBoundingClientRect().y;}
     var offsetX = mouseX - this.coords[0];
     var offsetY = mouseY - this.coords[1];
     interval = setInterval(this.move.bind(this, offsetX, offsetY), 10);
