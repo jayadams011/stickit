@@ -28,7 +28,7 @@ var binTop = 200;
 var binLeft = 600;
 var binWidth = 600;
 var binHeight = 500;
-setInterval(function() {if (document.querySelector('.trashbin') && mouseX > binLeft && mouseX < binLeft+binWidth && mouseY > binTop && mouseY < binTop+binHeight) renderContext = '.trashbin'; else renderContext = 'window';}, 50);
+setInterval(function() {if (document.querySelector('.trashbin') && mouseX > binLeft && mouseX < binLeft+binWidth && mouseY > binTop && mouseY < binTop+binHeight) renderContext = '.trashbin'; else renderContext = 'window';}, 10);
 
 function trashToggle() {
   var binEl = document.querySelector('.trashbin');
