@@ -260,14 +260,14 @@ function Note() {
     this.render();
   };
 
-  //removes note from the DOM
+  //removes note from the DOM, rerenders to trashbin if trashbin is rendered.
   this.trash = function() {
     this.trashed = true;
     Note.saveNotes();
     this.sfx = 'trashing';
     this.render();
     this.sfx = 'trashed';
-    setTimeout(function() {this.unrender();}.bind(this),1400);
+    setTimeout(function() {this.unrender(); if (document.querySelector('.trashbin')) {this.coords = [0,0]; this.render('.trashbin');}}.bind(this),1400);
   };
 
 }
