@@ -67,12 +67,15 @@ function Note() {
     noteEl.parentNode.removeChild(noteEl);
   };
 
-  this.render = function() {
+  this.render = function(selector) {
+    //if specified, selector will be used by querySelector to define the parent element of the note.
+    //if unspecified, the <body> will be the parent element.
+    var parentEl = selector || 'body';
+    
     //unrender if already on screen
     if (document.getElementById(this.id)) this.unrender();
 
     //create Elements
-    var bodyEl = document.querySelector('body');
     var noteEl = document.createElement('div');
     var noteGFilterEl = document.createElement('div');
     var noteFilterEl = document.createElement('div');
@@ -154,7 +157,7 @@ function Note() {
     window.addEventListener('unload', Note.onExit);
 
     //build note element and attach to DOM
-    bodyEl.appendChild(noteEl);
+    document.querySelector(parentEl).appendChild(noteEl);
     noteEl.appendChild(noteGFilterEl);
     noteEl.appendChild(noteFilterEl);
     noteEl.appendChild(noteTitleEl);
