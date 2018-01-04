@@ -33,6 +33,9 @@ function trashToggle() {
     document.querySelector('body').appendChild(binEl);
 
     for (var i = 0; i < Note.notes.length; i++)
-      if (Note.notes[i].trashed) Note.notes[i].render('.trashbin');
-  }
+      if (Note.notes[i].trashed) {
+        Note.notes[i].coords = [0,0];
+        Note.notes[i].render('.trashbin');
+      }
+    }
 };

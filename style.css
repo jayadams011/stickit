@@ -111,6 +111,7 @@ body>div:first-child {
 }
 
 .trashbin > div {
+  position: relative;
   z-index: 6;
   transform: scale(.3) !important;
   float: left;
