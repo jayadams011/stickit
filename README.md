@@ -25,7 +25,7 @@ Each note displayed on screen is a Note object. The Note() constructor function 
 the current xy-coordinates of the cursor, relative to the viewport.
 
 #### Note function constructor properties
-###### Note.arrCurlNames - *Array - Default: ['curl1','curl2','curl3']*
+###### Note.arrCurlNames - *Array - Default: ['curl1','curl2','curl3','curl4','curl5','curl6']*
 Used by *curl* on instantiation. Array of class names that correspond to note corner 'curl' effects found in style.css.
 ###### Note.notes - *Array - Default: []*
 Array of all notes that currently exist (either rendered or unrendered as a result of *trashed*. Notes are added at instantiation.
